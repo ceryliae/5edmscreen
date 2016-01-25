@@ -51,6 +51,10 @@
     text-indent: 40px;
 }
 
+.tocify-subheader .tocify-subheader .tocify-subheader {
+    text-indent: 50px;
+}
+
 /* Twitter Bootstrap Override Style */
 .nav-list > li > a, .nav-list .nav-header {
     margin: 0px;
