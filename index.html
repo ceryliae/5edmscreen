@@ -12,7 +12,7 @@
 			padding: 0;
 		}
 		dt { background-color:#CAAD6B; }
-		h3 { padding:0; margin:0; background-color:#E0E4C0; text-align:center;}
+		h3 { padding:0; margin:0;}
 		table.noborder, td.noborder { border-style: none;}
 		.nobackground { background:rgba(0,0,0,0);}
 		td { border: 1px solid #CAAD6B;}
@@ -95,11 +95,15 @@
 		}
 	}
 	
+
+	
 h1 { font-family:"MrsEavesSmallCaps"; font-weight:normal; font-size:28px; color: #581A0F; border-bottom: 2px solid #CAAD6B; padding:0px 0px; margin: 16px 0px 4px 0px; line-height:80%; }
 
-h2 { font-family:"NexusSans-BoldSC";  font-weight:normal; font-size:20px; margin: 10px 0px 4px 0px; }
+h2 { font-family:"MrsEavesSmallCaps"; font-weight:normal; font-size:23px; color: #581A0F; margin: 10px 0px 4px 0px; }
 
-h3 { font-family:"MrsEavesSmallCaps"; font-weight:normal; font-size:16px; }
+h3 { font-family:"MrsEavesSmallCaps"; font-weight:normal; font-size:20px; color: #581A0F; margin: 7px 0px 0px 0px; }
+
+h4 { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight:bold; font-size:16px; color: black; margin: 2px 2px 0px 0px; }
 
 		</style>
 		
@@ -114,372 +118,9 @@ h3 { font-family:"MrsEavesSmallCaps"; font-weight:normal; font-size:16px; }
    <div class="span9">
 		<div style="position: relative;">
 			<div class="ribbon">
-				<div class="ribbon-text">Version<br />&nbsp;&nbsp;0.3
+				<div class="ribbon-text">Version<br />&nbsp;&nbsp;0.3.1
 				</div>
 			</div>	   
-<!--		<ol type="I" class="collapsibleList">
-			<li>
-				<label for="Ability-Checks">Ability Checks</label>
-				<input type="checkbox" id="Ability-Checks" />
-				<ol type="A">
-					<li class="file"><a href="#skills">Skill Checks</a></li>
-					<li class="file"><a href="#difficultyclasses">Difficulty Classes</a></li>
-				</ol>
-			</li>
-			<li>
-				<label for="Ability-Scores">Ability Scores</label>
-				<input type="checkbox" id="Ability-Scores" />
-				<ol type="i">
-					<li class="file"><a href="#abilityscores">Ability Scores</a></li>
-					<li class="file"><a href="#abilitymodifiers">Ability Modifiers</a></li>
-					<li><label for="Strength-Scores">Strength</label>
-						<input type="checkbox" id="Strength-Scores" />
-						<ol type="a">
-						<li class="file"><a href="#strength">Strength</a></li>
-						<li class="file"><a href="#athletics">Athletics</a></li>
-						<li class="file"><a href="#featsofstrength">Feats of Strength</a></li>
-						</ol>
-					</li>
-					
-					<li><label for="Dex-Scores">Dexterity</label>
-						<input type="checkbox" id="Dex-Scores" />
-						<ol type="a">
-						<li class="file"><a href="#dexterity">Dexterity</a></li>
-						<li class="file"><a href="#acrobatics">Acrobatics</a></li>
-						<li class="file"><a href="#sleightofhand">Sleight of Hand</a></li>
-						<li class="file"><a href="#stealth">Stealth</a></li>
-						<li class="file"><a href="#picklock">Pick Lock, Disarm Trap, Other</a></li>
-						</ol>
-					</li>
-					
-					<li><label for="Con-Scores">Constitution</label>
-						<input type="checkbox" id="Con-Scores" />
-						<ol type="a">
-						<li class="file"><a href="#constitution">Constitution</a></li>
-						<li class="file"><a href="#concentration">Concentration</a></li>
-						<li class="file"><a href="#forcedmarch">Forced March</a></li>
-						<li class="file"><a href="#air">Air</a></li>
-						<li class="file"><a href="#food">Food</a></li>
-						<li class="file"><a href="#water">Water</a></li>
-						</ol>
-					</li>
-					
-					<li><label for="Int-Scores">Intelligence</label>
-						<input type="checkbox" id="Int-Scores" />
-						<ol type="a">
-						<li class="file"><a href="#intelligence">Intelligence</a></li>
-						<li class="file"><a href="#arcana">Arcana, History, Nature, Religion</a></li>
-						<li class="file"><a href="#investigation">Investigation, Other</a></li>
-						</ol>
-					</li>
-					
-					<li><label for="Wis-Scores">Wisdom</label>
-						<input type="checkbox" id="Wis-Scores" />
-						<ol type="a">
-						<li class="file"><a href="#wisdom">Wisdom</a></li>
-						<li class="file"><a href="#insight">Insight, Perception</a></li>
-						<li class="file"><a href="#survival">Survival</a></li>
-						<li class="file"><a href="#animalhandling">Animal Handling, Medicine, Other</a></li>
-						</ol>
-					</li>
-					
-					<li><label for="Cha-Scores">Charisma</label>
-						<input type="checkbox" id="Cha-Scores" />
-						<ol type="a">
-						<li class="file"><a href="#charisma">Charisma</a></li>
-						<li class="file"><a href="#deception">Deception</a></li>
-						<li class="file"><a href="#intimidation">Intimidation</a></li>
-						<li class="file"><a href="#performance">Performance</a></li>
-						<li class="file"><a href="#persuasion">Persuasion</a></li>
-						</ol>
-					</li>
-				</ol>
-			</li>
-			<li>
-				<label for="Combat">Combat</label>
-				<input type="checkbox" id="Combat" />
-				<ol type="i">
-					<li><label for="Conditions">Conditions</label>
-						<input type="checkbox" id="Conditions" />
-						<ol type="a">
-							<li class="file"><a href="#conditions">Conditions</a></li>
-							<li class="file"><a href="#blinded">Blinded</a></li>
-							<li class="file"><a href="#charmed">Charmed</a></li>
-							<li class="file"><a href="#deafened">Deafened</a></li>
-							<li class="file"><a href="#frightened">Frightened</a></li>
-							<li class="file"><a href="#grappled">Grappled</a></li>
-							<li class="file"><a href="#incapacitated">Incapacitated</a></li>
-							<li class="file"><a href="#invisible">Invisible</a></li>
-							<li class="file"><a href="#paralyzed">Paralyzed</a></li>
-							<li class="file"><a href="#petrified">Petrified</a></li>
-							<li class="file"><a href="#poisoned">Poisoned</a></li>
-							<li class="file"><a href="#restrained">Restrained</a></li>
-							<li class="file"><a href="#stunned">Stunned</a></li>
-							<li class="file"><a href="#unconscious">Unconscious</a></li>
-						</ol>
-					</li>
-					<li class="file"><a href="#exhaustion">Exhaustion</a></li>
-					<li class="file"><a href="#damagetypes">Damage Types</a></li>
-					<li class="file"><a href="#damageseverity">Damage Severity</a></li>
-					<li class="file"><a href="#aoetargets">Targets in Areas of Effect</a></li>
-					<li class="file"><a href="#cover">Cover</a></li>
-					<li class="file"><a href="#combatactions">Actions In Combat</a></li>
-					<li class="file"><a href="#stealthrules">The Rules of Stealth</a></li>
-					<li class="file"><a href="#grappling">Grappling, Shoving, and Climbing onto Bigger Creatures</a></li>
-					<li class="file"><a href="#readying">Readying an Action</a></li>
-					<li class="file"><a href="#death">Dropping to 0 Hit Points</a></li>
-					<li class="file"><a href="#wildmagic">Wild Magic Surge</a></li>
-				</ol>
-			</li>
-			<li>
-				<label for="Creatures">Adventuring</label>
-				<input type="checkbox" id="Creatures" />
-				<ol type="i">
-					<li class="file"><a href="#adventuring">Adventuring</a></li>
-					<li class="file"><a href="#characterlevel">PC Leveling Requirements</a></li>
-					<li class="file"><a href="#currency">Currency Exchange Rates</a></li>
-					<li class="file"><a href="#services">Adventuring Services</a></li>
-					<li class="file"><a href="#lifestyle">Lifestyle Expenses</a></li>
-					<li class="file"><a href="#lodging">Food, Drink, and Lodging</a></li>
-					<li class="file"><a href="#maptravelpace">Map Travel Pace</a></li>
-					<li class="file"><a href="#speed">Party Speed</a></li>
-					<li class="file"><a href="#encounterdistance">Encounter Distance</a></li>
-					<li class="file"><a href="#vision">Vision and Light</a></li>
-					<li class="file"><a href="#light">Light Sources</a></li>
-					<li class="file"><a href="#traps">Trap Save DCs and Attack Bonuses</a></li>
-					<li class="file"><a href="#damageseverity">Damage Severity and Level</a></li>
-					<li class="file"><a href="#improvizingdamage">Improvising Damage</a></li>
-					<li class="file"><a href="#objectac">Object AC</a></li>
-					<li class="file"><a href="#objecthp">Object HP</a></li>
-					<li class="file"><a href="#resting">Resting</a></li>
-					<li class="file"><a href="#weather">Weather</a></li>
-					<li class="file"><a href="#languages">Languages</a></li>	
-				</ol>
-			<li>
-				<label for="randomtables">Random Tables</label>
-				<input type="checkbox" id="randomtables" />
-				<ol type="a">
-					<li class="file"><a href="#quickfind">Quick Find</a></li>					
-					<li class="file"><a href="#somethinghappened">Something Happened</a></li>					
-					<li class="file"><a href="#randomhazards">Dungeon Hazards</a></li>					
-					<li class="file"><a href="#randomobstacles">Dungeon Obstacles</a></li>					
-					<li><label for="mytraps">Random Traps</label>
-					<input type="checkbox" id="mytraps" />
-					<ol type="a">
-						<li class="file"><a href="#randomtraptrigger">Trap Trigger</a></li>
-						<li class="file"><a href="#randomtrapseverity">Trap Damage Severity</a></li>
-						<li class="file"><a href="#randomtrapeffect">Trap Effect</a></li>
-					</ol>
-					</li>
-					<li><label for="mytricks">Random Tricks</label>
-					<input type="checkbox" id="mytricks" />
-						<ol type="a">
-							<li class="file"><a href="#trickobjects">Trick Objects</a></li>
-							<li class="file"><a href="#trickeffects">Trick Effects</a></li>
-						</ol>
-					</li>
-					<li><label for="madness">Madness</label>
-					<input type="checkbox" id="madness" />
-						<ol type="a">
-							<li class="file"><a href="#shortterm">Short-Term Madness</a></li>
-							<li class="file"><a href="#longterm">Long-Term Madness</a></li>
-							<li class="file"><a href="#indefinite">Indefinite Madness</a></li>
-						<li><label for="Demon-Madness">Demononic Madness</label>
-							<input type="checkbox" id="Demon-Madness" />
-							<ol type="a">
-							<li class="file"><a href="#Baphomet">Madness of Baphomet</a></li>
-							<li class="file"><a href="#Demogorgon">Madness of Demogorgon</a></li>							
-							<li class="file"><a href="#Frazurbluu">Madness of Fraz-Urb'luu</a></li>
-							<li class="file"><a href="#Grazzt">Madness of Graz'zt</a></li>							
-							<li class="file"><a href="#Juiblex">Madness of Juiblex</a></li>
-							<li class="file"><a href="#Orcus">Madness of Orcus</a></li>							
-							<li class="file"><a href="#Yeenoghu">Madness of Yeenoghu</a></li>							
-							<li class="file"><a href="#Zuggtmoy">Madness of Zuggtmoy</a></li>							
-						</ol>
-						</ol>						
-					</li>
-					<li><label for="dungeondressing">Dungeon Dressing</label>
-					<input type="checkbox" id="dungeondressing" />
-					<ol type="a">
-					<li class="file"><a href="#dungeonnoises">Noises</a></li>
-					<li class="file"><a href="#dungeonair">Air</a></li>
-					<li class="file"><a href="#dungeonodor">Odor</a></li>
-					<li class="file"><a href="#dungeongeneralfeatures">General Features</a></li>
-					<li class="file"><a href="#dungeongeneralfurnishing">General Furnishing and Appoinments</a></li>
-					<li class="file"><a href="#dungeonreligiousarticles">Religious Articles and Furnishings</a></li>
-					<li class="file"><a href="#dungeonmagefurnishings">Mage Furnishings</a></li>
-					<li class="file"><a href="#dungeonpersonalitems">Utensils and Personal Items</a></li>
-					<li class="file"><a href="#dungeoncontainercontents">Container Contents</a></li>
-					<li class="file"><a href="#dungeonbooks">Books, Scrolls, and Tomes</a></li>
-					<li class="file"><a href="#trinkets">Trinkets</a></li>	
-					<li class="file"><a href="#eviltrinkets">Elemental Evil Trinkets</a></li>				
-				</ol>
-			</li>
-			</ol>
-			<li>
-				<label for="World-Building">World Building</label>
-				<input type="checkbox" id="World-Building" />
-				<ol type="i">
-					<li class="file"><a href="#worldbuilding">World Building</a></li>
-					<li><label for="npcbuilding">NPC Building</label>
-						<input type="checkbox" id="npcbuilding" />
-						<ol type="a">
-							<li class="file"><a href="#npcbuilding">NPC Building</a></li>
-							<li class="file"><a href="#npccharacteristics">NPC Characteristics</a></li>
-							<li class="file"><a href="#npcideals">NPC Ideals</a></li>
-							<li class="file"><a href="#npcbonds">NPC Bonds</a></li>
-							<li class="file"><a href="#npcflaws">NPC Flaws and Secrets</a></li>
-							<li class="file"><a href="#namegenerator">Name Generator</a></li>
-						</ol>
-					</li>
-					<li><label for="building">Building Process</label>
-						<input type="checkbox" id="building" />
-						<ol type="a">
-							<li class="file"><a href="#encounterbuilding">Building Encounters</a></li>
-							<li class="file"><a href="#encounterdifficulty">Encounter Difficulty</a></li>
-							<li class="file"><a href="#encounterexp">Encounter EXP</a></li>
-							<li class="file"><a href="#sizecategories">Size Categories</a></li>
-						</ol>
-					</li>
-				</ol>
-			</li>
-			<li>
-				<label for="indexes">Book Indexes</label>
-				<input type="checkbox" id="indexes" />
-				<ol type="a">
-					<li><label for="phb-index">Players Handbook</label>
-						<input type="checkbox" id="phb-index" />
-							<ol type="i">
-								<li class="file"><a href="#phb-index-a">A</a></li>						
-								<li class="file"><a href="#phb-index-b">B</a></li>
-								<li class="file"><a href="#phb-index-c">C</a></li>
-								<li class="file"><a href="#phb-index-d">D</a></li>
-								<li class="file"><a href="#phb-index-e">E</a></li>
-								<li class="file"><a href="#phb-index-f">F</a></li>
-								<li class="file"><a href="#phb-index-g">G</a></li>
-								<li class="file"><a href="#phb-index-h">H</a></li>
-								<li class="file"><a href="#phb-index-i">I</a></li>
-								<li class="file"><a href="#phb-index-j">J</a></li>
-								<li class="file"><a href="#phb-index-k">K</a></li>
-								<li class="file"><a href="#phb-index-l">L</a></li>
-								<li class="file"><a href="#phb-index-m">M</a></li>
-								<li class="file"><a href="#phb-index-n">N</a></li>
-								<li class="file"><a href="#phb-index-o">O</a></li>
-								<li class="file"><a href="#phb-index-p">P</a></li>
-								<li class="file"><a href="#phb-index-q">Q</a></li>
-								<li class="file"><a href="#phb-index-r">R</a></li>
-								<li class="file"><a href="#phb-index-s">S</a></li>
-								<li class="file"><a href="#phb-index-t">T</a></li>
-								<li class="file"><a href="#phb-index-u">U</a></li>
-								<li class="file"><a href="#phb-index-v">V</a></li>
-								<li class="file"><a href="#phb-index-w">W</a></li>
-								<li class="file"><a href="#phb-index-x">X</a></li>
-								<li class="file"><a href="#phb-index-y">Y</a></li>
-								<li class="file"><a href="#phb-index-z">Z</a></li>				
-						</ol>			
-					</li>
-				</ol>
-			</li>
-			<li>
-				<label for="my-items">Adventuring Items</label>
-				<input type="checkbox" id="my-items" />
-				<ol type="i">
-					<li class="file"><a href="#items">Adventuring Items</a></li>
-					<li class="file"><a href="#armor">Basic Armor</a></li>
-					<li class="file"><a href="#weapons">Basic Weapons</a></li>
-					<li class="file"><a href="#weapon-properties">Weapon Properties</a></li>
-					<li class="file"><a href="#adventuringgear">Adventuring Gear</a></li>
-					<li class="file"><a href="#tools">Tools</a></li>
-					<li class="file"><a href="#mounts">Mounts and Other Animals</a></li>
-					<li class="file"><a href="#tack">Tack, Harness, and Drawn Vehicles</a></li>
-					<li class="file"><a href="#watervehicles">Waterborne Vehicles</a></li>
-				</ol>
-			</li>
-		  <!--<li>
-				<label for="Adventure-Modules">Adventure Modules</label>
-				<input type="checkbox" id="Adventure-Modules" />
-				<ol type="i">
-					<li><label for="Mines-of-Phandelver">Lost Mine of Phandelver</label>
-						<input type="checkbox" id="Mines-of-Phandelver" />
-							<ol type="a">
-								<li><label for="I-Goblin-Arrows">Part 1: Goblin Arrows</label>
-								<input type="checkbox" id="I-Goblin-Arrows" />
-								
-								<ol type="i">
-									<li class="file"><a href="#Goblin-Arrows">Introduction</a></li>
-									<li class="file"><a href="#Goblin-Ambush">Goblin Ambush</a></li>
-									<li class="file"><a href="#Goblin-Trail">Goblin Trail</a></li>
-									<li class="file"><a href="#Cragmaw-Hideout">Cragmaw Hideout</a></li>
-								</ol>
-
-								<li><label for="II-Phandalin">Part 2: Phandalin</label>
-								<input type="checkbox" id="II-Phandalin" />
-
-								<ol type="i">
-									<li class="file"><a href="#Phandalin">Introduction</a></li>
-									<li class="file"><a href="#Redbrand Hideout">Redbrand Hideout</a></li>
-								</ol>
-
-								<li><label for="III-Spidersweb">Part 3: The Spider's Web</label>
-								<input type="checkbox" id="III-Spidersweb" />
-
-								<ol type="i">
-									<li class="file"><a href="#The-Spiders-Web">Introduction</a></li>
-									<li class="file"><a href="#Triboar-Trail">Triboar Trail</a></li>
-									<li class="file"><a href="#Old-Owl-Well">Old Owl Well</a></li>
-									<li class="file"><a href="#Ruins-Of-Thundertree">Ruins of Thundertree</a></li>
-									<li class="file"><a href="#Wyvern-Tor">Wyvern Tor</a></li>
-									<li class="file"><a href="#Cragmaw-Castle">Cragmaw Castle</a></li>
-								</ol>
-
-								<li><label for="IV-Wave">Part 4: Wave Echo Cave</label>
-								<input type="checkbox" id="IV-Wave" />
-
-								<ol type="i">
-									<li class="file"><a href="#Wave-Echo-Cave">Introduction</a></li>
-									<li class="file"><a href="#IV-Wandering-Monsters">Wandering Monsters</a></li>
-									<li class="file"><a href="#Wave-Echo-Cave-Entry">Wave Echo Cave</a></li>
-								</ol>
-
-							</ol>
-					</li>
-					<li><label for="Tyranny-of-Dragons">Tyranny of Dragons</label>
-					<input type="checkbox" id="Tyranny-of-Dragons" />
-						<ol type="a">
-							<li><label for="hoardofthedragonqueen">Hoard of the Dragon Queen</label>
-								<input type="checkbox" id="hoardofthedragonqueen" />
-								<ol type="a">
-									<li class="file"><a href="#greenestencounters">Episode 1: Greenest Encounters</a></li>
-									<li class="file"><a href="#wanderingmonsters">Episode 3: Wandering Monsters</a></li>
-									<li class="file"><a href="#hiringout">Episode 4: Hiring Out</a></li>
-									<li class="file"><a href="#tradewayevents">Episode 4: Trade Way Events</a></li>
-									<li class="file"><a href="#encountersnorthofwaterdeep">Episode 5: Encounters North of Waterdeep</a></li>
-									<li class="file"><a href="#mereofdeadmenencounters">Episode 6: Mere of Dead Men Encounters</a></li>
-								</ol>
-							</li>
-							<li><label for="Tiamat">The Rise of Tiamat</label>
-								<input type="checkbox" id="Tiamat" />
-								<ol type="a">
-								<li class="file"><a href="#Rise-of-Tiamat">Coming Soon...</a></li>
-								</ol>
-							</li>	
-						</ol>
-					</li>	
-					<li><label for="Elemental-Evil">Elemental Evil</label>
-					<input type="checkbox" id="Elemental-Evil" />
-						<ol type="a">
-							<li><label for="PrincesofApocalypse">Princes of the Apocalypse</label>
-								<input type="checkbox" id="PrincesofApocalypse" />
-								<ol type="a">
-									<li class="file"><a href="#Elemental-Evil">Coming Soon...</a></li>
-								</ol>
-							</li>
-						</ol>
-					</li>	
-				</ol>
-			</li>-->		
-		</ol>
-	</nav>
 		<h1>Table of Contents</h1>
 		<i>Click on the section and subsection to quickly go to the topic you need.</i>
 		<br />
@@ -612,7 +253,7 @@ h3 { font-family:"MrsEavesSmallCaps"; font-weight:normal; font-size:16px; }
 			Ability Scores
 		</h1>
 		<table id="abilitymodifiers">
-			<tr><th colspan="4"><h3 class="nobackground">Ability Modifiers</h3></th></tr>
+			<h3>Ability Modifiers</h3>
 			<tr><th>Score</th><th>Modifier</th><th>Score</th><th>Modifier</th></tr>
 			<tr><td>1</td><td>-5</td><td>16-17</td><td>+3</td></tr>
 			<tr><td>2-3</td><td>-4</td><td>18-19</td><td>+4</td></tr>
@@ -624,16 +265,14 @@ h3 { font-family:"MrsEavesSmallCaps"; font-weight:normal; font-size:16px; }
 			<tr><td>14-15</td><td>+2</td><td>30</td><td>+10</td></tr>
 		</table>
 		
-		<dl>
-			<dt>
+		
 				<h2 id="strength">
 					Strength
 				</h2>
-			</dt>
-			<dd>
+			
+			
 				<i>Strength measures bodily power and athletic training.</i>
-			</dd>
-		</dl>
+
 		<table>
 			<tr><th id="strength">Strength</th><th align="center">Used For...</th><th align="left">Rule</th></tr>
 			<tr><td align="left">Score</td><td align="left">Determines modifier</td><td align="left">Refer to <a href="#abilitymodifiers">this</a> chart</td></tr>
@@ -649,14 +288,14 @@ h3 { font-family:"MrsEavesSmallCaps"; font-weight:normal; font-size:16px; }
 		² For each size category above medium, double the creatures carrying capacity and the amount it can pull, drag, or lift. For a tiny creature, half these weights.
 		<br>	² While pushing or dragging weight in excess of your carrying capacity, your speed drops to 5 feet.
 		
-		<dl><dt><h2>Strength Skills</h2></dt><dd><i>Below are all the skills associated with the Strength ability.</i></dd></dl>
+		<h3>Strength Skills</h3><i>Below are all the skills associated with the Strength ability.</i>
 		<table>
 			<tr id="athletics">
 				<th colspan="2">
 					<center>
-						<h3 class="nobackground">
+						<h4>
 							Athletics<sup>1</sup>
-						</h3>
+						</h4>
 					</center>
 				</th>
 			</tr>
@@ -748,16 +387,16 @@ h3 { font-family:"MrsEavesSmallCaps"; font-weight:normal; font-size:16px; }
 			<sup>2</sup> During a vertical jump a PC can extend their arms in order to achieve an extra distance equal to 1⁄2 of their height, which they can effectively add to their jump distance in order to attempt to grab on to a ledge or other handhold.
 		</p>
 		
-		<dl>
-			<dt>
+		
+			
 		<h2 id="dexterity">
 			Dexterity
 		</h2>
-	</dt>
-		<dd>
+	
+		
 			<i>Dexterity measures agility, reflexes, and balance.</i>
-</dd>
-</dl>
+
+
         <table>
             <tr><th id="dexterity">Dexterity</th><th align="center">Used For...</th><th align="left">Rule</th></tr>
 			<tr><td align="left">Score</td><td align="left">Determines modifier</td><td align="left">Refer to <a href="#abilitymodifiers">this</a> chart</td></tr>
@@ -771,7 +410,7 @@ h3 { font-family:"MrsEavesSmallCaps"; font-weight:normal; font-size:16px; }
 		</table>
 		² Certain types of medium and heavy armor add disadvantage to this roll.
 
-<dl><dt><h2>Dexterity Skills</h2></dt><dd><i>Below are all the skills associated with the Dexterity ability.</i></dd></dl>
+<h2>Dexterity Skills</h2><i>Below are all the skills associated with the Dexterity ability.</i>
 		<table>
 			<tr id="acrobatics">
 				<th colspan="2">
@@ -898,16 +537,16 @@ h3 { font-family:"MrsEavesSmallCaps"; font-weight:normal; font-size:16px; }
 			<sup>2</sup> Proficiency with Thieves' Tools allows a player to add their proficiency bonus to checks made to open locks and disarm traps.<br>
 			<sup>3</sup> Such as Operation <sup>TM</sup><br>
 			
-			<dl>
-				<dt>
+			
+				
 		<h2 id="constitution">
 			Constitution<sup>1</sup>
 		</h2>
-	</dt>
-	<dd>
+	
+	
 			<i>Constitution measures health, stamina, and vital force.</i>
-		</dd>
-	</dl>
+		
+	
 	        <table>
 	            <tr><th id="constitution">Constitution</th><th align="center">Used For...</th><th align="left">Rule</th></tr>
 				<tr><td align="left">Score</td><td align="left">Determines constitution modifier</td><td align="left">Refer to <a href="#abilitymodifiers">this</a> chart</td></tr>
@@ -924,7 +563,7 @@ h3 { font-family:"MrsEavesSmallCaps"; font-weight:normal; font-size:16px; }
 			</table>
 	
 	
-	<dl><dt><h2>Constitution Skills</h2></dt><dd><i>Below are all the skills associated with the Constitution ability.</i></dd></dl>
+	<h2>Constitution Skills</h2><i>Below are all the skills associated with the Constitution ability.</i>
 		<table>
 			<tr id="concentration">
 				<th colspan="2">
@@ -1027,14 +666,14 @@ h3 { font-family:"MrsEavesSmallCaps"; font-weight:normal; font-size:16px; }
 				<sup>3</sup> A PC requires one gallon of water per day, or two if the climate is harsh.
 				<br>
 				
-				<dl>
-					<dt>
+				
+					
 				<h2 id="intelligence">
 					Intelligence
 				</h2>
-			</dt>
-				<dd><i>Intelligence measures mental acuity, accuracy of recall, and the ability to reason.</i></dd>
-			</dl>
+			
+				<i>Intelligence measures mental acuity, accuracy of recall, and the ability to reason.</i>
+			
 			        <table>
 			            <tr><th id="intelligence">Intelligence</th><th align="center">Used For...</th><th align="left">Rule</th></tr>
 						<tr><td align="left">Score</td><td align="left">Determines modifier</td><td align="left">Refer to <a href="#abilitymodifiers">this</a> chart</td></tr>
@@ -1044,7 +683,7 @@ h3 { font-family:"MrsEavesSmallCaps"; font-weight:normal; font-size:16px; }
 						<tr><td>Other possible uses</td><td align="left">Communicate with a creature without words. Estimate the value of a precious item. Forge a document. Recall lore about a craft or trade. Win a game of skill.</td><td /></tr>
 					</table>
 			
-				<dl><dt><h2>Intelligence Skills</h2></dt><dd><i>Below are all the skills associated with the Intelligence ability.</i></dd></dl>
+				<h2>Intelligence Skills</h2><i>Below are all the skills associated with the Intelligence ability.</i>
 				<table>
 					<tr id="arcana">
 						<th colspan="2">
@@ -1130,15 +769,15 @@ h3 { font-family:"MrsEavesSmallCaps"; font-weight:normal; font-size:16px; }
 					</tr>
 				</table><br>
 				
-				<dl>
-					<dt>
+				
+					
 				<h2 id="wisdom">
 					Wisdom
 				</h2>
-					</dt>
-					<dd><i>Wisdom measures perceptiveness, intuition, and attunement with the surrounding world.</i>
-					</dd>
-				</dl>
+					
+					<i>Wisdom measures perceptiveness, intuition, and attunement with the surrounding world.</i>
+					
+				
 				        <table>
 				            <tr><th id="wisdom">Wisdom</th><th align="center">Used For...</th><th align="left" width="40%">Rule</th></tr>
 							<tr><td align="left">Score</td><td align="left">Determines modifier</td><td align="left">Refer to <a href="#abilitymodifiers">this</a> chart</td></tr>
@@ -1148,7 +787,7 @@ h3 { font-family:"MrsEavesSmallCaps"; font-weight:normal; font-size:16px; }
 							<tr><td>Other possible uses</td><td align="left">Get a gut feeling about what course of action to follow. Discern whether a seemingly dead or living creature is undead.</td><td /></tr>
 						</table>
 				
-				<dl><dt><h2>Wisdom Skills</h2></dt><dd><i>Below are all the skills associated with the Wisdom ability.</i></dd></dl>
+				<h2>Wisdom Skills</h2><i>Below are all the skills associated with the Wisdom ability.</i>
 				<table>
 					<tr id="insight">
 						<th colspan="2">
@@ -1291,14 +930,14 @@ h3 { font-family:"MrsEavesSmallCaps"; font-weight:normal; font-size:16px; }
 					</tr>
 				</table><br>
 				
-				<dl>
-					<dt>
+				
+					
 				<h2 id="charisma">
 					Charisma
 				</h2>
-					</dt>
-					<dd><i>Charisma measures force of personality, persuasiveness, personal magnetism, social influence, and physical attractiveness.</i></dd>
-				</dl>
+					
+					<i>Charisma measures force of personality, persuasiveness, personal magnetism, social influence, and physical attractiveness.</i>
+				
 				        <table>
 				            <tr><th id="charisma">Charisma</th><th align="center">Used For...</th><th align="left">Rule</th></tr>
 							<tr><td align="left">Score</td><td align="left">Determines modifier</td><td align="left">Refer to <a href="#abilitymodifiers">this</a> chart</td></tr>
@@ -1308,7 +947,7 @@ h3 { font-family:"MrsEavesSmallCaps"; font-weight:normal; font-size:16px; }
 							<tr><td>Other possible uses</td><td align="left">Find the best person to talk to for news and gossip. Blend into a crowd to get the sense of key topics of conversation.</td><td /></tr>
 						</table>
 				
-				<dl><dt><h2>Charisma Skills</h2></dt><dd><i>Below are all the skills associated with the Charisma ability.</i></dd></dl>
+				<h2>Charisma Skills</h2><i>Below are all the skills associated with the Charisma ability.</i>
 				<table>
 					<tr id="deception">
 						<th colspan="2">
@@ -2200,39 +1839,39 @@ h3 { font-family:"MrsEavesSmallCaps"; font-weight:normal; font-size:16px; }
 				<h2 id="grapplingshovingclimbing">
 					Grappling, Shoving, and Climbing onto Bigger Creatures
 				</h2>When you take the <a href="#attackaction">attack action</a> you can use one attack to grapple, shove, or climb onto an enemy.<br>
-				<dl>
-					<dt >
+				
+
 						<b id="grappling">Grappling</b>
-					</dt>
-					<dd>
+					
+					
 						You can grab a creature which is no more than one size category higher than you. Using at least one free hand, you make an Athletics check contested by the target's Athletics or Acrobatics check. If you succeed, the target is now <a href="#grappled">grappled</a> by you. You can also grapple an enemy to climb on top of it.
-					</dd>
-					<dt>
+					
+					
 						<b>Escaping a grapple.</b>
-					</dt>
-					<dd>
+					
+					
 						While grappled, a creature can use its action to make an Athletics or Acrobatics check opposed by your Athletics check. If the creature succeeds, it moves to a space next to you.
-					</dd>
-					<dt>
+					
+					
 						<b>Moving a grappled creature.</b>
-					</dt>
-					<dd>
+					
+					
 						When you move, you can drag or carry the grappled creature with you, but your speed is halved, unless the creature is two or more sizes smaller than you.
-					</dd>
-					<dt>
+					
+					
 						<b id="shoving">Shoving</b>
-					</dt>
-					<dd>
+					
+					
 						Using the attack action, you can attempt to shove a creature no more than one size larger than you. You make an Athletics check opposed by its Athletics or Acrobatics check. If you succeed you either move it 5 feet in any direction or knock it <a href="#prone">prone</a>.
-					</dd>
-					<dt>
+					
+					
 						<b id="climbingontobiggercreatures">Climbing onto Bigger Creatures</b>
-					</dt>
-					<dd>
+					
+					
 						A suitably large creature can be treated as terrain for the purpose of jumping onto its back or clinging to a limb. Once you make any ability checks necessary to get into position and to get onto the bigger creature, the smaller creature uses its action to make an Athletics or Acrobatics check contested by the targets Acrobatics check. If it wins the contest, the smaller creature successfully moves into the target creature's space and clings to his body. While in the target's space, the smaller creature moves with the target and has advantage on attack rolls against it.<br>
 						&nbsp;&nbsp;&nbsp;&nbsp;The smaller creature can move around within the larger creature's space, treating the space as difficult terrain. The larger creature may or may not be able to attack the smaller creature, depending on the smaller creature's location, this is up to the DM. The larger creature can try to dislodge the creature as an action - shaking it off, scraping it against a wall, grabbing and throwing it off - by making an Athletics check opposed by the smaller creature's Athletics or Acrobatics check.
-					</dd>
-				</dl>
+					
+				
 				<h2 id="readying">
 					Readying an Action
 				</h2>&nbsp;&nbsp;&nbsp;&nbsp;As an action on your turn, you can take the Ready action so that you may act later in the round using your reaction. To do this, you need to clearly define 2 things.<br>
@@ -2244,44 +1883,44 @@ h3 { font-family:"MrsEavesSmallCaps"; font-weight:normal; font-size:16px; }
 				<h2 id="death">
 					Dropping to 0 Hit Points
 				</h2>
-				<dl>
-					<dt>
+				
+					
 						<b>Death Saving Throws</b>
-					</dt>
-					<dd>
+					
+					
 						When you start your turn at 0 hit points, you need to make a death saving throw. Rolling 9 and below counts as a failure, and 10 and above counts as a success. If you accrue 3 failures before 3 successes, you die. If you accrue 3 successes, you are stabilized. If you regain any hit points, both your successes and failures are reset.
-					</dd>
-					<dt>
+					
+					
 						<b>Rolling 1 or 20.</b>
-					</dt>
-					<dd>
+					
+					
 						When you make a death saving throw and roll a 1 on the d20, it counts as two failures. If you roll a 20 on the d20, you regain 1 hit point.
-					</dd>
-					<dt>
+					
+					
 						<b>Damage at 0 Hit Points.</b>
-					</dt>
-					<dd>
+					
+					
 						If you take any damage while you have 0 hit points, you suffer a death saving throw failure. If the damage is from a critical hit, you suffer two failures instead. If the damage equals or exceeds your hit point maximum, you suffer instant death.
-					</dd>
-					<dt>
+					
+					
 						<b>Instant Death</b>
-					</dt>
-					<dd>
+					
+					
 						Massive damage can kill you instantly. When damage reduces you to 0 hit points and there is damage remaining, you die if the remaining damage equals or exceeds your hit point maximum. For example, a cleric with a maximum of 12 hit points currently has 6 hit points. If she takes 18 damage from an attack, she is reduced to 0 hit points, but 12 damage remains. Because the remaining damage equals her hit point maximum, the cleric dies.
-					</dd>
-					<dt>
+					
+					
 						<b>Falling Unconscious</b>
-					</dt>
-					<dd>
+					
+					
 						If damage reduces you to 0 hit points and fails to kill you, you fall <a href="#unconscious">unconscious</a>. This unconsciousness ends if you regain any hit points.
-					</dd>
-					<dt>
+					
+					
 						<b>Stabilizing a Creature</b>
-					</dt>
-					<dd>
+					
+					
 						The best way to save a creature with 0 hit points is to heal it. If healing is unavailable, the creature can at least be stabilized so that it isn't killed by a failed death saving throw. You can use your action to administer first aid to an unconscious creature and attempt to stabilize it, which requires a successful DC 10 Medicine check. A stable creature doesn't make death saving throws, even though it has 0 hit points, but it does remain unconscious. The creature stops being stable, and must start making death saving throws again, if it takes any damage. A stable creature that isn't healed regains 1 hit point after 1d4 hours.
-					</dd>
-				</dl><br />
+					
+				<br />
 				<h2 id="wildmagic">Wild Magic</h2>
 				<i>Immediately after you cast a sorcerer spell of 1st level or higher, the DM can have you roll a d20. If you roll a 1, roll on the Wild Magic Surge table to create a random magical effect.</i><br /><br />
 				<table id="wildmagic">
@@ -3067,7 +2706,7 @@ h3 { font-family:"MrsEavesSmallCaps"; font-weight:normal; font-size:16px; }
 				<sup>1</sup> First and second level spellscasting services are easy enough to find in a decently sized city or town.<br>
 				<sup>2</sup> Third level and higher spells are much more rare and can only be found with any amount of regularity in a large city, perhaps home to a University or Temple.<br>
 				<sup>3</sup> Often times a spellcaster might ask for a service rather than monetary payment.
-			</dd><br />
+			<br />
 				<br /><br />
 				
 				<table id="lifestyle">
@@ -3975,11 +3614,11 @@ h3 { font-family:"MrsEavesSmallCaps"; font-weight:normal; font-size:16px; }
 				<h2 id="resting">
 					Resting
 				</h2>
-				<dl>
-					<dt>
+				
+					
 						<b>Short Rest:</b>
-					</dt>
-					<dd>
+					
+					
 						<ul>
 							<li>A period of downtime lasting at least one hour, during which time you can do nothing more strenuous than eating, drinking, reading, or tending to wounds.
 							</li>
@@ -3990,11 +3629,11 @@ h3 { font-family:"MrsEavesSmallCaps"; font-weight:normal; font-size:16px; }
 						</ul>
 						<b>Full Text:</b>
 						A short rest is a period of downtime, at least 1 hour long, during which a character does nothing more strenuous that eating, drinking, reading, and tending to wounds. A character can spend one or more Hit Dice at the end of a short rest, up to the character's maximum number of Hit Dice, which is equal to the character's level. For each Hit Dice spent in this way, the player rolls the die and adds the character's Constitution modifier to it. The character regains hit points equal to the total. The player can decide to spend an additional Hit Die after each roll. A character regains some spent Hit Dice upon finishing a long rest, as explained below.
-					</dd>
-					<dt>
+					
+					
 						<b>Long Rest:</b>
-					</dt>
-					<dd>
+					
+					
 						<ul>
 							<li>A period of extended downtime lasting at least eight hours, during which time you must either sleep or perform only light activities such as talking, eating, or standing watch. These activities can occupy no more than 2 hours of your Long Rest. Performing more than an hour of strenuous activity such as walking or fighting will also interrupt your Long Rest. You may only benefit from one Long Rest in a 24-hour period and you must begin the rest with at least one hit point.
 							</li>
@@ -4009,8 +3648,8 @@ h3 { font-family:"MrsEavesSmallCaps"; font-weight:normal; font-size:16px; }
 						A long rest is a period of extended downtime, at least 8 hours long, during which a character sleeps or performs light activity: reading, talking, eating or standing watch for no more than 2 hours. If the rest in interrupted by a period of strenuous activity - at least 1 hour of waking, fighting, casting spells, or similar adventuring activity - the characters must begin the rest again to gain any benefit from it. 
 						At the end of a long rest, a character regains all lost hit points. The character also regains spent Hit Dice, up to a number of dice equal to half of the character's total number of them. For example, if a character has eight Hit Dice, he or she can regain four spent Hit Dice upon finishing a long rest.
 						A character can't benefit from more than one long rest in a 24-hour period, and a character must have at least 1 hit point at the start of the rest to gain its benefits.
-					</dd>
-				</dl><br>
+					
+				<br>
 				<h2 id="weather">
 					Weather
 				</h2>
@@ -4296,7 +3935,8 @@ h3 { font-family:"MrsEavesSmallCaps"; font-weight:normal; font-size:16px; }
 				</tr>
 			</table>
 			<br />
-			<h2 id="randomtraptrigger">Trap Trigger</h2>
+			<h2>Traps</h2>
+			<h3 id="randomtraptrigger">Trap Trigger</h2>
 			<table>
 				<tr>
 					<th align="left">d6</th>
@@ -4328,7 +3968,7 @@ h3 { font-family:"MrsEavesSmallCaps"; font-weight:normal; font-size:16px; }
 				</tr>
 			</table>
 			<br />
-			<h2 id="randomtrapseverity">Trap Severity</h2>			
+			<h3 id="randomtrapseverity">Trap Severity</h2>			
 			<table>
 				<tr>
 					<th align="left">d6</th>
@@ -4349,7 +3989,7 @@ h3 { font-family:"MrsEavesSmallCaps"; font-weight:normal; font-size:16px; }
 			</table>
 Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and damage for the trap.
 			<br />
-			<h2 id="randomtrapeffect">Trap Effect</h2>
+			<h3 id="randomtrapeffect">Trap Effect</h2>
 			<table>
 				<tr>
 					<th width="8%" align="left">d100</th>
@@ -4481,7 +4121,8 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
 				</tr>
 			</table>
 			<br />
-			<h2 id="trickobjects">Trick Objects</h2>
+			<h2>Tricks</h2>
+			<h3 id="trickobjects">Trick Objects</h2>
 			<table>
 				<tr>
 					<th align="left">d20</th>
@@ -4569,7 +4210,7 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
 				</tr>
 			</table>
 			<br />
-			<h2 id="trickeffects"></h2>
+			<h3 id="trickeffects"></h2>
 			<table>
 				<tr>
 					<th align="left">d100</th>
@@ -4756,7 +4397,7 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
 			</table>
 			<sup>1</sup> A <i>calm emotions</i> spell can supress the effects of madness, while a <i>lesser restoration</i> spell can rid a character of long-term madness. Depending on the source of the madness, <i>remove curse</i> or <i>dispel evil</i> might also prove effective. 
 			<br />
-			<h2 id="longterm">Long-Term Madness</h2>
+			<h3 id="longterm">Long-Term Madness</h3>
 			<table>
 				<tr>
 					<th width="9%" align="left">d100</th>
@@ -4813,7 +4454,7 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
 			</table>
 			<sup>1</sup> A <i>calm emotions</i> spell can supress the effects of madness, while a <i>lesser restoration</i> spell can rid a character of long-term madness. Depending on the source of the madness, <i>remove curse</i> or <i>dispel evil</i> might also prove effective. 
 			<br />	
-			<h2 id="indefinite">Indefinite Madness</h2>
+			<h3 id="indefinite">Indefinite Madness</h3>
 			<table>
 				<tr>
 					<th width="9%" align="left">d100</th>
@@ -4870,7 +4511,8 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
 			</table> 	
 			<sup>1</sup> A <i>calm emotions</i> spell can supress the effects of madness. A <i>greater restoration</i> spell or more powerful magic is required to rid a character of indefinite madness.
 			<br />
-			<h2 id="Baphomet">Madness of Baphomet</h2>
+			<h3>Demonic Madness</h3>
+			<h4 id="Baphomet">Madness of Baphomet</h4>
 			<table>
 				<tr>
 					<th align="left" width="9%">d100</th>
@@ -4899,7 +4541,7 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
 			</table>	
 			<sup>1</sup> A <i>calm emotions</i> spell can supress the effects of madness. A <i>greater restoration</i> spell or more powerful magic is required to rid a character of indefinite madness.		
 			<br />
-			<h2 id="Demogorgon">Madness of Demogorgon</h2>
+			<h4 id="Demogorgon">Madness of Demogorgon</h4>
 			<table>
 				<tr>
 					<th align="left" width="9%">d100</th>
@@ -4928,7 +4570,7 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
 			</table>		
 			<sup>1</sup> A <i>calm emotions</i> spell can supress the effects of madness. A <i>greater restoration</i> spell or more powerful magic is required to rid a character of indefinite madness.			
 			<br />
-			<h2 id="Frazurbluu">Madness of Fraz-Urb'luu</h2>
+			<h4 id="Frazurbluu">Madness of Fraz-Urb'luu</h4>
 			<table>
 				<tr>
 					<th align="left" width="9%">d100</th>
@@ -4957,7 +4599,7 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
 			</table>	
 			<sup>1</sup> A <i>calm emotions</i> spell can supress the effects of madness. A <i>greater restoration</i> spell or more powerful magic is required to rid a character of indefinite madness.		
 			<br />
-			<h2 id="Graazt">Madness of Graz'zt</h2>
+			<h4 id="Graazt">Madness of Graz'zt</h4>
 			<table>
 				<tr>
 					<th align="left" width="9%">d100</th>
@@ -4990,7 +4632,7 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
 			</table>			
 			<sup>1</sup> A <i>calm emotions</i> spell can supress the effects of madness. A <i>greater restoration</i> spell or more powerful magic is required to rid a character of indefinite madness.
 			<br />
-			<h2 id="Juiblex">Madness of Juiblex</h2>
+			<h4 id="Juiblex">Madness of Juiblex</h4>
 			<table>
 				<tr>
 					<th align="left" width="9%">d100</th>
@@ -5019,7 +4661,7 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
 			</table>			
 			<sup>1</sup> A <i>calm emotions</i> spell can supress the effects of madness. A <i>greater restoration</i> spell or more powerful magic is required to rid a character of indefinite madness.
 			<br />
-			<h2 id="Orcus">Madness of Orcus</h2>
+			<h4 id="Orcus">Madness of Orcus</h4>
 			<table>
 				<tr>
 					<th align="left" width="9%">d100</th>
@@ -5048,7 +4690,7 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
 			</table>	
 			<sup>1</sup> A <i>calm emotions</i> spell can supress the effects of madness. A <i>greater restoration</i> spell or more powerful magic is required to rid a character of indefinite madness.		
 			<br />
-			<h2 id="Yeenoghu">Madness of Yeenogu</h2>
+			<h4 id="Yeenoghu">Madness of Yeenogu</h4>
 			<table>
 				<tr>
 					<th align="left" width="9%">d100</th>
@@ -5077,7 +4719,7 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
 			</table>
 			<sup>1</sup> A <i>calm emotions</i> spell can supress the effects of madness. A <i>greater restoration</i> spell or more powerful magic is required to rid a character of indefinite madness.			
 			<br />
-			<h2 id="Zuggtmoy">Madness of Zuggtmoy</h2>
+			<h4 id="Zuggtmoy">Madness of Zuggtmoy</h4>
 			<table>
 				<tr>
 					<th align="left" width="9%">d100</th>
@@ -5108,7 +4750,7 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
 			<br />
 			<h2 id="dungeondressing">Dungeon Dressing</h2>
 			<br />				
-			<h2 id="dungeonnoises">Noises</h2>		
+			<h3 id="dungeonnoises">Noises</h2>		
 			<table>
 				<tr>
 					<th align="left">d100</th>
@@ -5336,7 +4978,7 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
 				</tr>
 			</table>
 			<br />
-			<h2 id="dungeonair">Air</h2>
+			<h3 id="dungeonair">Air</h2>
 			<table>
 				<tr>
 				<th align="left">d100</th>
@@ -5384,7 +5026,7 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
 				</tr>
 			</table>
 			<br />
-			<h2 id="dungeonodor">Odor</h2>							
+			<h3 id="dungeonodor">Odor</h2>							
 			<table>
 			<tr>
 				<th align="left">d100</th>
@@ -5448,7 +5090,7 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
 				</tr>
 			</table>
 			<br />
-			<h2 id="dungeongeneralfeatures">General Features</h2>
+			<h3 id="dungeongeneralfeatures">General Features</h2>
 			<table>
 				<tr>
 					<th align="left">d100</th>
@@ -5664,7 +5306,7 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
 				</tr>
 			</table>
 			<br />
-			<h2 id="dungeongeneralfurnishing">General Furnishing</h2>			
+			<h3 id="dungeongeneralfurnishing">General Furnishing</h2>			
 			<table>
 				<tr>
 				<th>d100</th>
@@ -6024,7 +5666,7 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
 				</tr>
 			</table>
 			<br />
-			<h2 id="dungeonreligiousarticles">Religious Articles and Furnishings</h2>
+			<h3 id="dungeonreligiousarticles">Religious Articles and Furnishings</h2>
 			<table>
 				<tr>
 				<th align="left">d100</th>
@@ -6196,7 +5838,7 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
 				</tr>
 			</table>
 			<br />
-			<h2 id="dungeonmagefurnishings">Mage Furnishings</h2>
+			<h3 id="dungeonmagefurnishings">Mage Furnishings</h2>
 			<table>
 				<tr>
 					<th align="left">d100</th>
@@ -6444,7 +6086,7 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
 				</tr>
 			</table>
 			<br />
-			<h2 id="dungeonpersonalitems">Utensils and Personal Items</h2>								
+			<h3 id="dungeonpersonalitems">Utensils and Personal Items</h2>								
 			<table>
 				<tr>
 					<th align="left">d100</th>
@@ -6764,7 +6406,7 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
 				</tr>
 			</table>
 			<br />
-			<h2 id="dungeoncontainercontents">Container Contents</h2>			
+			<h3 id="dungeoncontainercontents">Container Contents</h2>			
 			<table>
 				<tr>
 					<th align="left">d100</th>
@@ -6880,7 +6522,7 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
 				</tr>
 			</table>
 			<br />
-			<h2 id="dungeonbooks">Books, Scrolls, and Tomes</h2>
+			<h3 id="dungeonbooks">Books, Scrolls, and Tomes</h2>
 			<table>
 				<tr>
 				<th align="left">d100</th>
@@ -7091,6 +6733,7 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
 		   <br />
 	<br />
 	<h2 id="trinkets">Trinkets</h2>
+	<h3>Player's Handbook Trinkets</h3>
 		<table>
 		<tr>
 			<th align="left" width="5%">d100</th>
@@ -7498,7 +7141,7 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
 		</tr>
 		</table>
     <br />
-    <h2 id="eviltrinkets">Elemental Evil Trinkets</h2>
+    <h3 id="eviltrinkets">Elemental Evil Trinkets</h2>
     <table>
         <tr>
             <th align="left" width="5%">d100</th>
@@ -9373,32 +9016,32 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
 				<p id="encounterprocess">
 					<i>You can use this process after you've already designed an encounter to determine its difficulty or you can use it to start an Encounter from scratch with a target difficulty in mind.
 						</i></p>
-				<dl>
-					<dt>
+				
+					
 						<h3 class="nobackground">Step 1</h3>
-					</dt>
-					<dd>
+					
+					
 						Start by making a note of the Exp values that define the four difficulty categories for your group. For each adventurer in the party refer to the <a href="#encounterdifficulty">Encounter Difficulty Exp</a> per Character table, noting the exp values for each character in each category. Then for each category add the exp values for each character in that category to determine the difficulty thresholds for encounters.
-					</dd>
-					<dt>
+					
+					
 						<h3 class="nobackground">Step 2</h3>
-					</dt>
-					<dd>
+					
+					
 						Next, select each creature you want to include in your encounter. Add up their Exp Values, which can be found in their stat block next to their Challenge Rating, to get the encounter's Exp Value.
-					</dd>
-					<dt>
+					
+					
 						<h3 class="nobackground">Step 3</h3>
-					</dt>
-					<dd>
+					
+					
 						Adjust the encounter Exp Value by the multiplier found in the <a href="#encounterexp">Encounter Exp</a> Multipliers table according to the size of the adventuring party.
-					</dd>
-					<dt>
+					
+					
 						<h3 class="nobackground">Step 4</h3>
-					</dt>
-					<dd>
+					
+					
 						Compare the adjusted encounter Exp Value with the difficulty thresholds you calculated in Step 1 to get an estimate of the encounter's difficulty. Adjust the encounter accordingly.
-					</dd>
-				</dl>
+					
+				
 				<br />
 				<table id="encounterdifficulty">
 					<tr>
@@ -10078,8 +9721,8 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
 						</td>
 					</tr>
 				</table>
-			</dd>
-		</dl>
+			
+		
         <h1 id="items">Adventuring Items List</h1><br />
         <table id="armor">
 			<tr><th colspan="4"><h3 class="nobackground">Basic Armor</h3></th></tr>
@@ -10170,35 +9813,35 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
 		<br /><br />
 
 		<h2 id="weapon-properties">Weapon Properties</h2>
-		<dl>
-			<dt>Ammunition</dt>
-				<dd>You can use a weapon that has the ammunition property to make a ranged attack only if you have ammunition to fire from the weapon. Each time you attack with the weapon, you expend one piece of ammunition. Drawing the ammunition from a quiver, case, or other container is part of the attack. At the end of the battle, you can recover half your expended ammunition by taking a minute to search the battlefield.</dd>
-			<dt>Finesse</dt>
-				<dd>When making an attack with a finesse weapon, you use your choice of your Strength or Dexterity modifier for the attack and damage rolls. You must use the same modifier for both rolls.</dd>
-			<dt>Heavy</dt>
-				<dd>Small creatures have disadvantage on attack rolls with heavy weapons. A heavy weapon's size and bulk make it too large for a Small creature to use effectively.</dd>
-			<dt>Light</dt>
-				<dd>A light weapon is small and easy to handle, making it ideal for use when fighting with two weapons.</dd>
-			<dt>Loading</dt>
-				<dd>Because of the time required to load this weapon, you can fire only one piece of ammunition from it when you use an action, bonus action, or reaction to fire it, regardless of the number of attacks you can normally make.</dd>
-			<dt>Range</dt>
-				<dd>A weapon that can be used to make a ranged attack has a range shown in parentheses after the ammunition or thrown property. The range lists two numbers. The first is the weapon's normal range in feet, and the second indicates the weapon's maximum range. When attacking a target beyond normal range, you have disadvantage on the attack roll. You can't attack a target beyond the weapon's long range.</dd>
-			<dt>Reach</dt>
-				<dd>This weapon adds 5 feet to your reach when you attack with it.</dd>
-			<dt>Special</dt>
-				<dd>A weapon with the special property has unusual rules governing its use, explained in the weapon's description (see "Special Weapons" later in this section).</dd>
-			<dt>Thrown</dt>
-				<dd>If a weapon has the thrown property, you can throw the weapon to make a ranged attack. If the weapon is a melee weapon, you use the same ability modifier for that attack roll and damage roll that you would use for a melee attack with the weapon. For example, if you throw a handaxe, you use your Strength, but if you throw a dagger, you can use either your Strength or your Dexterity, since the dagger has the finesse property.</dd>
-			<dt>Two-Handed</dt>
-				<dd>This weapon requires two hands to use.</dd>
-			<dt>Versatile</dt>
-				<dd>This weapon can be used with one or two hands. A damage value in parentheses appears with the property—the damage when the weapon is used with two hands to make a melee attack.</dd>
-			<dt>Special Weapon (Lance)</dt>
-				<dd>You have disadvantage when you use a lance to attack a target within 5 feet of you. Also, a lance requires two hands to wield when you aren't mounted.</dd>
-			<dt>Special Weapon (Net)</dt>
-				<dd>A Large or smaller creature hit by a net is restrained until it is freed. A net has no effect on creatures that are formless, or creatures that are Huge or larger. A creature can use its action to make a DC 10 Strength check, freeing itself or another creature within its reach on a success. Dealing 5 slashing damage to the net (AC 10) also frees the creature without harming it, ending the effect and destroying the net. 
-				&nbsp;&nbsp;&nbsp;&nbsp;When you use an action, bonus action, or reaction to attack with a net, you can make only one attack regardless of the number of attacks you can normally make.</dd>
-		</dl>
+		
+			Ammunition
+				You can use a weapon that has the ammunition property to make a ranged attack only if you have ammunition to fire from the weapon. Each time you attack with the weapon, you expend one piece of ammunition. Drawing the ammunition from a quiver, case, or other container is part of the attack. At the end of the battle, you can recover half your expended ammunition by taking a minute to search the battlefield.
+			Finesse
+				When making an attack with a finesse weapon, you use your choice of your Strength or Dexterity modifier for the attack and damage rolls. You must use the same modifier for both rolls.
+			Heavy
+				Small creatures have disadvantage on attack rolls with heavy weapons. A heavy weapon's size and bulk make it too large for a Small creature to use effectively.
+			Light
+				A light weapon is small and easy to handle, making it ideal for use when fighting with two weapons.
+			Loading
+				Because of the time required to load this weapon, you can fire only one piece of ammunition from it when you use an action, bonus action, or reaction to fire it, regardless of the number of attacks you can normally make.
+			Range
+				A weapon that can be used to make a ranged attack has a range shown in parentheses after the ammunition or thrown property. The range lists two numbers. The first is the weapon's normal range in feet, and the second indicates the weapon's maximum range. When attacking a target beyond normal range, you have disadvantage on the attack roll. You can't attack a target beyond the weapon's long range.
+			Reach
+				This weapon adds 5 feet to your reach when you attack with it.
+			Special
+				A weapon with the special property has unusual rules governing its use, explained in the weapon's description (see "Special Weapons" later in this section).
+			Thrown
+				If a weapon has the thrown property, you can throw the weapon to make a ranged attack. If the weapon is a melee weapon, you use the same ability modifier for that attack roll and damage roll that you would use for a melee attack with the weapon. For example, if you throw a handaxe, you use your Strength, but if you throw a dagger, you can use either your Strength or your Dexterity, since the dagger has the finesse property.
+			Two-Handed
+				This weapon requires two hands to use.
+			Versatile
+				This weapon can be used with one or two hands. A damage value in parentheses appears with the property—the damage when the weapon is used with two hands to make a melee attack.
+			Special Weapon (Lance)
+				You have disadvantage when you use a lance to attack a target within 5 feet of you. Also, a lance requires two hands to wield when you aren't mounted.
+			Special Weapon (Net)
+				A Large or smaller creature hit by a net is restrained until it is freed. A net has no effect on creatures that are formless, or creatures that are Huge or larger. A creature can use its action to make a DC 10 Strength check, freeing itself or another creature within its reach on a success. Dealing 5 slashing damage to the net (AC 10) also frees the creature without harming it, ending the effect and destroying the net. 
+				&nbsp;&nbsp;&nbsp;&nbsp;When you use an action, bonus action, or reaction to attack with a net, you can make only one attack regardless of the number of attacks you can normally make.
+		
 
 		<br /><br />
 		
@@ -15821,946 +15464,7 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
     <td>zombie (creature), 311</td>
   </tr>
 </table>		
-		<!--<br>
-		<h2 id="Adventure-Modules">Adventure Modules</h2>			
-		<dl>
-			<dt><h3 class="nobackground">Starter Set: Lost Mines of Phandelver</h3></dt>
-				<dd><i>Lost Mine of Phandelver is an adventure for four to five characters of 1st level. During the course of the adventure, the characters will advance to 5th level. The adventure is set a short distance from the city of Neverwinter in the Sword Coast region of the Forgotten Realms setting. The Sword Coast is part of the North-a vast realm of free settlements surrounded by wilderness and adventure.</i></dd>
-		</dl>
-
-		<h3 id="Goblin-Arrows">Part 1: Goblin Arrows</h3>
-		<i>Here are the combat encounters and main traps for Part 1.  Please note that the PCs can get to Phandelver before going to the Cragmaw Hideout. The adventure begins as the player characters are escorting a wagon full of provisions and supplies from Neverwinter to Phandalin.</i><br />
-		<dl>
-			<dt><h3 id="Goblin-Ambush" class="nobackground">Goblin Ambush</h3></dt>
-				<dd><b>Encounter:</b> Four goblins (hiding)</dd>
-				<dd>&nbsp;&nbsp;&nbsp;&nbsp;• 2 Goblins Melee</dd>
-				<dd>&nbsp;&nbsp;&nbsp;&nbsp;• 2 Goblins Ranged (30 ft.)</dd>
-				<dd><b>Goblin stealth modifier:</b> +6</dd>
-				<dd><b>Notes:</b>  When 3 goblins are defeated, 1 attempts to flee down the goblin trail.</dd>
-			<dt><h3 id="Goblin-Trail" class="nobackground">Goblin Trail</h3></dt>
-				<dd><b>Trap:</b> Snare</dd>
-				<dd><b>Perception Score Needed:</b> 12 or higher</dd>
-				<dd><b>Dex Saving Throw:</b> 10 or higher</dd>
-				<dd><b>On failed save:</b></dd>
-				<dd>• Character is hung upside down.</dd>
-				<dd>• 1d6 Bludgeoning damage if not lowered carefully.</dd>
-				<dd><br /></dd>
-				<dd><b>Trap:</b> Pit</dd>
-				<dd><b>Perception Score Needed:</b> 15 or higher</dd>
-				<dd><b>Dex Saving Throw:</b> 10 or higher</dd>
-				<dd><b>On failed save:</b></dd>
-				<dd>• Fall in taking 1d6 bludgeoning damage.</dd>
-				<dd>• No ability check is required to get out.</dd>
-		</dl>
-			<h3 id="Cragmaw-Hideout">Cragmaw Hideout</h3>
-			<i>The Cragmaw tribe of goblins has established a hideout from which it can easily harass and plunder traffic moving along the Triboar Trail or the path to Phandalin. The Cragmaw tribe is so named because each member of the tribe sharpens its teeth so they appear fierce and jagged.</i>
-
-		<dl>
-			<dt><h3 class="nobackground">Goblin Blind</h3></dt>
-				<dd><b>Combat:</b> Two goblins</dd>
-				<dd><b>Notes:</b></dd>
-				<dd>• Characters moving slowly and carefully may surprise the goblins.</dd>
-				<dd>• Thickets around the clearing provide half cover to creatures attacking through them</dd>
-			<dt><h3 class="nobackground">Kennel</h3></dt>
-				<dd><b>Combat:</b> Three Wolves</dd>
-				<dd><b>Notes:</b></dd>
-				<dd>• They can't reach targets on the steps.</dd>
-				<dd>• All 3 attack any creature, except a goblin</dd>
-				<dd>• Goblins inside the cave ignore the noises</dd>
-				<dd>• Calm the wolves with a DC 15 Animal Handling check.  <i>(This goes to 10 if they are given food.)</i></dd>
-			<dt><h3 class="nobackground">Overpass</h3></dt>
-				<dd><b>Combat:</b> Goblin Guard</dd>
-				<dd><b>Notes:</b></dd>
-				<dd>• A PC needs a perception check vs guard stealth check to see the guard.</dd>
-				<dd>• The goblin notices the PCs if they carry any light, or do no use stealth on approach</dd>
-				<dd>• Goblin signals companions to release flood, then throws javelins.</dd>
-			<dt><h3 class="nobackground">Goblin Den</h3></dt>
-				<dd><b>Encounter:</b> Six goblins (one leader with 12 HP)</dd>
-				<dd><b>Ordinary Goblins:</b> Tending fire in lower (northern) section</dd>
-				<dd><b>Leader Goblin (Yeemik):</b> Resting in upper (southern) part.</dd>
-				<dd><b>Notes:</b></dd>
-				<dd>• When Yeemik sees the goblins are losing, he drags a human (Sildar) to the cliff and wants a truce.</dd>
-				<dd>• If they parley, Yeemik (supposedly) will release Sildar when they bring Klarg's head</dd>
-				<dd>• If they refuse parley, fight continues and Sildar is pushed off the cliff and is unconscious</dd>
-			<dt><h3 class="nobackground">Twin Pools Cave</h3></dt>
-				<dd><b>Encounter:</b> Three Goblins</dd>
-				<dd><b>Notes:</b></dd>
-				<dd>• If the goblins were warned earlier by overpass goblin, these are ready for trouble.</dd>
-				<dd>• As soon as the fight starts, one goblin flees to warn Klarg</dd>
-			<dt><h3 class="nobackground">Klarg's Cave</h3></dt>
-				<dd><b>Combat:</b> 5 Total Creatures</dd>
-				<dd>&nbsp;&nbsp;&nbsp;&nbsp;• Klarg (bugbear)</dd>
-				<dd>&nbsp;&nbsp;&nbsp;&nbsp;• 1 wolf (Ripper)</dd>
-				<dd>&nbsp;&nbsp;&nbsp;&nbsp;• 2 goblins</dd>
-				<dd><b>Fire Pit:</b>  Deals 1 damage to any that enter, or 1d6 to any who fall prone.</dd>
-				<dd><b>Notes:</b></dd>
-				<dd>• If he is warned, everyone hides to try and surprise the PCs.</dd>
-				<dd>• If he isn't warned, they can be surprised (best through chimney).</dd>
-				<dd>• If the wolf is killed, he attempts to flee through the chimney.</dd>
-		</dl>
-		
-		<br>
-		<h3 id="Phandalin">Part 2: Phandalin</h3>
-		<i>Here are the combat encounters and main traps for Part 2.  Please note that there are many quests here and the Redbrand Hideout can be dealt with at a later time.</i>
-		<dl>
-			<dt><h3 id="Ruffians" class="nobackground">Redbrand Ruffians</h3></dt>
-				<dd><b>Encounter:</b> 4 Redbrand Ruffians</dd>
-				<dd><b>Notes:</b></dd>
-				<dd>• The ruffians attack in a round or two if PCs don't.</dd>
-				<dd>• When three of them are down, the 4th flees toward Tresendar Manor.
-		</dl>
-		<h3 id="Redbrand Hideout">Redbrand Hideout</h3>
-		<i>If the PCs begin their search at the Manor, they start in area 1.  If they follow Carp Alderleaf to the secret tunnel, they enter the dungeon at area 8.</i>
-		<dl>
-			<dt><h3 class="nobackground">Barracks</h3></dt>
-				<dd><b>Encounter:</b> 3 Redbrand Ruffians</dd>
-				<dd><b>Notes:</b></dd>
-				<dd>• If the ruffians hear noise from PCs in area one, they try for surprise attack</dd>
-			<dt><h3 class="nobackground">Trapped Hall</h3></dt>
-				<dd><b>Trap:</b> Pit</dd>
-				<dd><b>Perception Score Needed:</b> 15 or higher</dd>
-				<dd><b>Dex Saving Throw:</b> 15 or higher</dd>
-				<dd><b>On failed save:</b></dd>
-				<dd>• Fall in taking 2d6 bludgeoning damage and lands prone.</dd>
-				<dd>• If trap is found, PC needs DC 10 dex check to go around edges.</dd>
-			<dt><h3 class="nobackground">Tresendar Crypts</h3></dt>
-				<dd><b>Encounter:</b> 3 Skeletons</dd>
-				<dd><b>Notes:</b></dd>
-				<dd>• These attack when anyone comes within 10 feet of the door leading to area 5 or 6 unless that creature is wearing the scarlet cloak of the Redbrands or speaks the password "Illefarn".</dd>
-			<dt><h3 class="nobackground">Slave Pens</h3></dt>
-				<dd><b>Encounter:</b> 2 Redbrand Ruffians</dd>
-				<dd><b>Notes:</b></dd>
-				<dd>• If the ruffians hear fighting from area 5, they will try to surprise intruders.</dd>
-			<dt><h3 class="nobackground">Crevasse</h3></dt>
-				<dd><b>Encounter:</b> Nothic</dd>
-				<dd><b>Notes:</b></dd>
-				<dd>• Lurks near west end of the bridges.</dd>
-				<dd>• If it sees people come in, it hides behind a stone pillar and watches them while trying to use its Weird Insight to discern characters' secrets.</dd>
-				<dd>• Communicates with telepathy if detected, and would rather negotiate and will betray Redbrands for the right incentives.</dd>
-			<dt><h3 class="nobackground">Guard Barracks</h3></dt>
-				<dd><b>Encounter:</b></dd>
-				<dd>&nbsp;&nbsp;&nbsp;&nbsp;• 3 bugbears</dd>
-				<dd>&nbsp;&nbsp;&nbsp;&nbsp;• 1 goblin (Droop)</dd>
-				<dd><b>Notes:</b></dd>
-				<dd>• The goblin (Droop) falls unconscious for 1d10 minutes when seeing the party.</dd>
-				<dd>• If the party is wearing scarlet cloaks the bugbears assume they server Iarno.</dd>
-				<dd>• DC 15 can convince the bugbears to do what the party wants.</dd>
-			<dt><h3 class="nobackground">Common Room</h3></dt>
-				<dd><b>Encounter:</b> 4 Redbrand Ruffians</dd>
-				<dd><b>Notes:</b></dd>
-				<dd>• If the characters bust in through the room, they surprise the ruffians.</dd>
-				<dd>• The ruffians are poisoned from too much drinking.</dd>
-				<dd>• The ruffians recognize the party as imposters if they have the cloaks on.</dd>
-			<dt><h3 class="nobackground">Glasstaff's Quarters</h3></dt>
-				<dd><b>Encounter:</b> Evil Mage (Iarno)</dd>
-				<dd><b>Notes:</b></dd>
-				<dd>• Iarno can be surprised if they come in from the secret passage in area 7, otherwise the rat familiar warns him of any who approach.</dd>
-				<dd>• If he isn't surprised, Iarno flees through the secret door in the northeast corner.</dd>
-				<dd>• If he manages to escape, he flees through area 1 from areas 7 and 8.</dd>
-				<dd>• Iarno instructs the nothic to waylay anyone that comes through if he makes it down there.</dd>
-		</dl>
-		
-		<br>
-		<h3 id="The-Spiders-Web">Part 3: The Spider's Web</h3>
-		<i>Here are the combat encounters and main traps for Part 3.  In this part of the adventure, the characters follow up on existing leads and lines of inquiry. They can't learn much more in Phandalin, so they need to set out into the forests and hills surrounding the town to uncover the larger plots they are caught up in.</i><br /><br />
-		
-		<h3 id="Triboar-Trail">Triboar Trail</h3>
-		<i>During this part of the adventure, the characters will frequently be marching overland from one point of interest to another. As can be seen on the regional map, some of these areas are a good forty to fifty miles apart, requiring several days of marching overland to travel to the next adventure site.</i>
-		<br /><br />
-
-		<table>
-			<tr><th colspan="3"><h3 class="nobackground">Wilderness Encounters</h3></th></tr>
-			<tr><th>Day Roll</th><th>Night Roll</th><th>Result</th></tr>
-			<tr><td>1-2</td><td>1-3</td><td>Stirges (1d8+2)</td></tr>
-			<tr><td>-</td><td>4</td><td>Ghouls (1d4+1)</td></tr>
-			<tr><td>3-4</td><td>-</td><td>Ogre (1)</td></tr>
-			<tr><td>5-6</td><td>5</td><td>Goblins (1d6+3)</td></tr>
-			<tr><td>7-8</td><td>6</td><td>Hobgoblins (1d4+2)</td></tr>
-			<tr><td>9-10</td><td>7-8</td><td>Orcs (1d4+2)</td></tr>
-			<tr><td>11</td><td>9-10</td><td>Wolves (1d4+2)</td></tr>
-			<tr><td>12</td><td>11-12</td><td>Owlbear (1)</td></tr>
-		</table><br /><br />
-
-		<h3 id="Old-Owl-Well">Old Owl Well</h3>
-		<i>Built thousands of years ago by a long-vanished empire, Old Owl Well is a ruined watchtower that now consists of little more than a few crumbling walls and the broken stump of a tower.</i>
-		<dl>
-			<dt><h3 class="nobackground">Entering Old Owl Well</h3></dt>
-				<dd><b>Encounter:</b></dd>
-				<dd>&nbsp;&nbsp;&nbsp;&nbsp;• 12 zombies</dd>
-				<dd>&nbsp;&nbsp;&nbsp;&nbsp;• 1 evil mage (Hamun Kost)</dd>
-				<dd><b>Notes:</b></dd>
-				<dd>• The zombies can't be seen, but can be smelled with passive perception of 10 or higher.</dd>
-				<dd>• If battle erupts, the evil mage erupts from his tent.</dd>
-				<dd>• DC 10 arcana check reveals tattoo as necromantic symbol.</dd>
-				<dd>• DC 10 history check reveals he is from Thay, a land where wizards tattoo their flesh with tattoos to represent school of magic.</dd>
-				<dd>• If anyone talks to Kost, he stops zombies from combat temporarily.</dd>
-				<dd>• Kost is willing to strike a deal that advances his interests at helps the characters</dd>
-		</dl>
-			<h3 id="Ruins-Of-Thundertree">Ruins of Thundertree</h3>
-			<i>Near the place where the Neverwinter River emerges from Neverwinter Wood stands the abandoned village of Thundertree. Once, this was a prosperous community on the outskirts of the forest, wealthy from the work of its woodcutters and trappers.</i>
-		<dl>
-			<dt><h3 class="nobackground">Westernmost Cottage</h3></dt>
-				<dd><b>Encounter:</b> 2 Twig Blights</dd>
-				<dd><b>Notes:</b></dd>
-				<dd>• Compare the stealth check of the blights to the perception scores of the characters to determine if the blights are spotted.</dd>
-				<dd>• Blights here do not attack on their own (only self-defense).</dd>
-			<dt><h3 class="nobackground">Blighted Cottages</h3></dt>
-				<dd><b>Encounter:</b> 6 Twig Blights (+2 more)</dd>
-				<dd><b>Notes:</b></dd>
-				<dd>• Compare the stealth check of the blights to the perception scores of the characters to determine if the blights are spotted.</dd>
-				<dd>• One round after the attack starts, the two twig blights from room 1 join the fray.</dd>
-			<dt><h3 class="nobackground">The Brown Horse</h3></dt>
-				<dd><b>Encounter:</b> 4 Ash Zombies</dd>
-				<dd><b>Notes:</b></dd>
-				<dd>• When living creatures enter, they stand from prone spending half their speed.</dd>
-			<dt><h3 class="nobackground">Blighted Farmhouse</h3></dt>
-				<dd><b>Encounter:</b> 8 Twig Blights</dd>
-				<dd><b>Notes:</b></dd>
-				<dd>• Each round for 3 rounds, two twig blights head for the south doorway, while two more head for the north doorway.</dd>
-			<dt><h3 class="nobackground">Ruined Store</h3></dt>
-				<dd><b>Encounter:</b> 2 Giant Spiders</dd>
-				<dd><b>Notes:</b></dd>
-				<dd>• They surprise any character whose passive perception is less than 17.</dd>
-				<dd><br /></dd>
-				<dd><b>Trap:</b> Webs</dd>
-				<dd><b>Athletics Check Needed:</b> 10 or higher</dd>
-				<dd><b>On failed save:</b></dd>
-				<dd>• Creature is restrained in webs.</dd>
-				<dd>• DC 12 Strength check to break free rolled each round.</dd>
-				<dd>• Creature can cut its way free using a light weapon that deals slashing damage.  The webs have <b>AC 10 and 5HP</b>.</dd>
-			<dt><h3 class="nobackground">Dragon's Tower</h3></dt>
-				<dd><b>Encounter:</b> Young Green Dragon (Venomfang)</dd>
-				<dd><b>Notes:</b></dd>
-				<dd>• If the characters reduce the dragon to half HP, it climbs to the top of the tower and flies away.</dd>
-			<dt><h3 class="nobackground">Old Smithy</h3></dt>
-				<dd><b>Encounter:</b> 2 Ash Zombies</dd>
-				<dd><b>Notes:</b></dd>
-				<dd>• When living creatures enter, they stand from prone spending half their speed.</dd>
-			<dt><h3 class="nobackground">Old Garrison</h3></dt>
-				<dd><b>Encounter:</b> 5 Ash Zombies</dd>
-				<dd><b>Notes:</b></dd>
-				<dd>• They animate and attack if any living creature disturbs their rest.</dd>
-			<dt><h3 class="nobackground">Weaver's Cottage</h3></dt>
-				<dd><b>Encounter:</b> 6 Twig Blights</dd>
-				<dd><b>Notes:</b></dd>
-				<dd>• Compare the stealth check of the blights to the perception scores of the characters to determine if the blights are spotted.</dd>
-			<dt><h3 class="nobackground">Dragon Cultists</h3></dt>
-				<dd><b>Encounter:</b> 6 Human Cultists</dd>
-				<dd><b>Notes:</b></dd>
-				<dd>• 4 cultists stand guard (2 in each room), the others rest in the larger chamber.</dd>
-				<dd>• An alliance can be struck with the cultists through their leader, Favric.</dd> 
-		</dl>
-		<h3 id="Wyvern-Tor">Wyvern Tor</h3>
-
-		<i>This crag is a prominent landmark in the rugged hills northeast of the Sword Mountains, and is easily visible from twenty miles away. People traveling along the Triboar Trail in the vicinity of Conyberry catch glimpses of Wyvern Tor to the south as they go.</i>
-
-		<dl>
-			<dt><h3 class="nobackground">Orc Camp</h3></dt>
-				<dd><b>Encounter:</b></dd>
-				<dd>&nbsp;&nbsp;&nbsp;&nbsp;• Lone Orc</dd>
-				<dd>&nbsp;&nbsp;&nbsp;&nbsp;• Six Ordinary Orcs</dd>
-				<dd>&nbsp;&nbsp;&nbsp;&nbsp;• 30 HP Orc (Brughor Axe-Biter)</dd>
-				<dd>&nbsp;&nbsp;&nbsp;&nbsp;• Ogre (Gog)</dd>
-				<dd><b>Notes:</b></dd>
-				<dd>• If the lone orc is quietly taken out, the party has a chance to surprise the others.</dd>
-				<dd>• Gog fights until slain, the other orcs fight until Brughor is slain in which they will flee.</dd>
-		</dl>
-
-		<h3 id="Cragmaw-Castle">Cragmaw Castle</h3>
-		<i>Raised by a talented wizard-noble of old Phalorm, an ancient realm that once controlled much of the North, the stronghold consists of seven overlapping towers; however, its upper levels have long since collapsed to heaps of crumbling masonry. Only the ground floor is still sound enough to be habitable.</i>
-
-		<dl>
-			<dt><h3 class="nobackground">Trapped Hall</h3></dt>
-				<dd><b>Encounter:</b></dd>
-				<dd>&nbsp;&nbsp;&nbsp;&nbsp;• 3 Goblins (from area 4)</dd>
-				<dd>&nbsp;&nbsp;&nbsp;&nbsp;• 4 Hobgoblins (from area 6)</dd>
-				<dd><b>Notes:</b></dd>
-				<dd>• If the goblin sentries raised the alarm, the monsters above come out of the north and south doors at the same time.  They attack from both directions trying to drive the adventurers out of the castle.</dd>
-				<dd><br /></dd>
-				<dd><b>Trap:</b> Tripwire</dd>
-				<dd><b>Perception Score Needed:</b> 20 passive or 10 active</dd>
-				<dd><b>Dexterity Save:</b> 10 (for half damage)</dd>
-				<dd><b>On failed save:</b></dd>
-				<dd>• Any creature in the area takes 3d6 bludgeoning damage.</dd>
-				<dd>• The noise alerts the monsters in areas 3,7,8, and 9.</dd>
-			<dt><h3 class="nobackground">Archer Post</h3></dt>
-				<dd><b>Encounter:</b></dd>
-				<dd>&nbsp;&nbsp;&nbsp;&nbsp;• 2 Goblins (first room)</dd>
-				<dd>&nbsp;&nbsp;&nbsp;&nbsp;• 2 Goblins (second room)</dd>
-				<dd><b>Notes:</b></dd>
-				<dd>• By taking turns shooting arrows and ducking back, both archers can fire each round at targets outside.</dd>
-				<dd>• When characters enter the room, the goblins drop their shortbows and draw their melee weapons.</dd>
-			<dt><h3 class="nobackground">Ruined Barracks</h3></dt>
-				<dd><b>Encounter:</b></dd>
-				<dd>&nbsp;&nbsp;&nbsp;&nbsp;• 3 Goblins</dd>
-				<dd><b>Notes:</b></dd>
-				<dd>• Any loud noises here attract the attention of the goblins in area 7.  One goblin comes to investigate the disturbance.  If it doesn't return, or if it spots trouble, the others come to investigate.</dd>
-			<dt><h3 class="nobackground">Hobgoblin Barracks</h3></dt>
-				<dd><b>Encounter:</b> 4 Hobgoblins</dd>
-				<dd><b>Notes:</b></dd>
-				<dd>• They don't pay attention to noise in other areas, but will respond to intruders or alarms raised by sentries.</dd>
-			<dt><h3 class="nobackground">Banquet Hall</h3></dt>
-				<dd><b>Encounter:</b></dd>
-				<dd>&nbsp;&nbsp;&nbsp;&nbsp;• 7 Goblins</dd>
-				<dd>&nbsp;&nbsp;&nbsp;&nbsp;• 12 HP Goblin (Yegg)</dd>
-				<dd><b>Notes:</b></dd>
-				<dd>• When Yegg is killed the other goblins flee through the east or west doors.</dd>
-			<dt><h3 class="nobackground">Dark Hall</h3></dt>
-				<dd><b>Encounter:</b> Grick</dd>
-				<dd><b>Notes:</b></dd>
-				<dd>• Compare grick's stealth check to characters' perception check or passive scores to determine which of them is surprised.</dd>
-				<dd>• If combat erupts here, goblins in area 9 cannot be surprised.</dd>
-			<dt><h3 class="nobackground">Goblin Shrine</h3></dt>
-				<dd><b>Encounter:</b></dd>
-				<dd>&nbsp;&nbsp;&nbsp;&nbsp;• 12 HP Goblin (Lhupo)</dd>
-				<dd>&nbsp;&nbsp;&nbsp;&nbsp;• 2 Goblins</dd>
-				<dd><b>Notes:</b></dd>
-				<dd>• If the goblins heard the characters fighting in area 8, they hide behind the altar to surprise the adventurers.</dd>
-			<dt><h3 class="nobackground">Guard Barracks</h3></dt>
-				<dd><b>Encounter:</b> 2 Hobgoblins</dd>
-				<dd><b>Notes:</b></dd>
-				<dd>• At the start of combat, one hobgoblin runs to area 14 to warn King Grol.  It returns to combat 2 rounds later.</dd>
-			<dt><h3 class="nobackground">Owlbear Tower</h3></dt>
-				<dd><b>Encounter:</b> 1 Owlbear</dd>
-				<dd><b>Notes:</b></dd>
-				<dd>• If a character throws food the owlbear will devour it, otherwise it attacks the first creature in the door.</dd>
-			<dt><h3 class="nobackground">King's Quarters</h3></dt>
-				<dd><b>Encounter:</b></dd>
-				<dd>&nbsp;&nbsp;&nbsp;&nbsp;• 45 HP Bugbear (King Grol)</dd>
-				<dd>&nbsp;&nbsp;&nbsp;&nbsp;• 1 Wolf</dd>
-				<dd>&nbsp;&nbsp;&nbsp;&nbsp;• Doppelganger as female drow (Vyerith)</dd>
-				<dd><b>Notes:</b></dd>
-				<dd>• If the villains were warned, Vyerith hides behind the door to the northeast and King Grol holds Gundren hostage.</dd>
-		</dl>
-
-		
-		<br>
-
-		<h3 id="Wave-Echo-Cave">Part 4: Wave Echo Cave</h3>
-		<i>Here are the combat encounters and main traps for Part 4. The adventurers now have the chance to aid Gundren, avenge his kin, and put a stop to the nefarious schemes of the Black Spider. And of course, the hoard of powerful magic rumored to be hidden in the mines is a rich prize.</i><br /><br />
-		
-		<table id="IV-Wandering-Monsters">
-			<tr><th colspan="2"><h3 class="nobackground">Wandering Monsters</h3></th></tr>
-			<tr><th>D12 Roll</th><th>Result</th></tr>
-			<tr><td>1-3</td><td>Stirges (2d4)</td></tr>
-			<tr><td>4-5</td><td>Ghouls (1d4)</td></tr>
-			<tr><td>6</td><td>Gricks (1d4)</td></tr>
-			<tr><td>7-8</td><td>Bugbears (1d4)</td></tr>
-			<tr><td>9</td><td>Skeletons (1d6)</td></tr>
-			<tr><td>10</td><td>Zombies (1d6)</td></tr>
-			<tr><td>11-12</td><td>Ochre Jelly (1)</td></tr>
-			<tr><th colspan="2">Encounter on 17-20</th></tr>
-		</table><br />
-
-		<dl>
-			<dt><h3 class="nobackground" id="Wave-Echo-Cave-Entry">Cave Entrance</h3></dt>
-				<dd><b>Open Pit:</b></dd>
-				<dd><b>DC Required</b> 15 strength (athletics)</dd>
-				<dd><b>Notes:</b></dd>
-				<dd>• Climbing up or down the wall without a rope requires a successful Strength (Athletics) check.</dd>
-				<dd>• Anyone failing the check takes 1d6 bludgeoning damage per 10 feet.</dd>
-			<dt><h3 class="nobackground">Mine Tunnels</h3></dt>
-				<dd><b>Encounter:</b> Ochre Jelly</dd>
-				<dd><b>Notes:</b></dd>
-				<dd>• When the party enters this area, the jelly stalks the group waiting for an opportunity to attack a lone target.</dd>
-			<dt><h3 class="nobackground">Old Entrance</h3></dt>
-				<dd><b>Encounter:</b> 10 Stirges</dd>
-				<dd><b>Notes:</b></dd>
-				<dd>• Any character not looking at the ceiling is surprised unless his or her passive Wisdom (Perception) score is higher than the stirges' Dexterity (stealth) check total (roll a dice once for all of them).</dd>
-				<dd>• Characters who aren't surprised hear a flapping noise as the stirges descend to attack.</dd>
-			<dt><h3 class="nobackground">Old Guardroom</h3></dt>
-				<dd><b>Encounter:</b> 9 Skeletons</dd>
-				<dd><b>Notes:</b></dd>
-				<dd>• The round after characters enter, they begin to form.</dd>
-			<dt><h3 class="nobackground">South Barracks</h3></dt>
-				<dd><b>Encounter:</b> 3 Ghouls</dd>
-				<dd><b>Notes:</b></dd>
-				<dd>• These ghouls attack immediately.</dd>
-			<dt><h3 class="nobackground">Fungi Cavern</h3></dt>
-				<dd><b>Poison Gas:</b></dd>
-				<dd><b>DC Required</b> 11 Constitution</dd>
-				<dd><b>On Failed Save:</b></dd>
-				<dd>• Anyone failing the save takes 3d6 poison damage and is poisoned for 10 minutes.</dd>
-				<dd><b>Notes:</b></dd>
-				<dd>• The gas disperses after 1 minute, but any creature that ends its turn in the cavern must repeat the saving throw.</dd>
-			<dt><h3 class="nobackground">Great Cavern</h3></dt>
-				<dd><b>Encounter:</b> 7 Ghouls</dd>
-				<dd><b>Notes:</b></dd>
-				<dd>• The escarpments are 10 feet high and require a DC12 Strength (Athletics) check to climb.  A creature that falls or is knocked down takes 1d6 bludgeoning damage and is knocked prone.</dd>
-			<dt><h3 class="nobackground">North Barracks</h3></dt>
-				<dd><b>Encounter:</b> 5 Bugbears</dd>
-				<dd><b>Notes:</b></dd>
-				<dd>• Nothing of importance.</dd>
-			<dt><h3 class="nobackground">Smelter Cavern</h3></dt>
-				<dd><b>Encounters:</b></dd>
-				<dd>&nbsp;&nbsp;&nbsp;&nbsp;• 8 Zombies</dd>
-				<dd>&nbsp;&nbsp;&nbsp;&nbsp;• 1 Flameskull</dd>
-				<dd><b>Notes:</b></dd>
-				<dd>• The zombies rise and pursue any living creatures entering the room, but do not pursue outside the room for more than 1 round.</dd>
-			<dt><h3 class="nobackground">Wizard's Cavern</h3></dt>
-				<dd><b>Encounters: Mormesk the Wraith</b></dd>
-				<dd><b>Notes:</b></dd>
-				<dd>• He rises out of the floor when a living creature enters the room.</dd>
-				<dd>• He can be reasoned with if they haven't harmed him, and haven't taken anything</dd>
-				<dd>• He will not part with the wooden pipe no matter what.</dd>
-				<dd>• It's best to offer him magic items (scrolls, spellbooks, arcane knowledge), along with a DC 10 Charisma (Persuasion) check.</dd>
-			<dt><h3 class="nobackground">Forge of Spells</h3></dt>
-				<dd><b>Encounters:</b> Spectator</dd>
-				<dd><b>Notes:</b></dd>
-				<dd>• If the party tries to remove anything from the room, he attacks.</dd>
-				<dd>• A successful DC (Deception) check, can convince the spectator into thinking one or more party members are wizards or miners who work for the owners of Wave Echo Cave, sent to terminate spectator's employment.  On success, the spectator believes you and vanishes back to its home plane.</dd>
-				<dd>• If the spectator is blinded, he vanishes to his home plane.</dd>
-			<dt><h3 class="nobackground">Collapsed Cavern</h3></dt>
-				<dd><b>Encounters:</b></dd>
-				<dd>&nbsp;&nbsp;&nbsp;&nbsp;• 3 Bugbears</dd>
-				<dd>&nbsp;&nbsp;&nbsp;&nbsp;• Doppelganger (Vhalak)</dd>
-				<dd><b>Notes:</b></dd>
-				<dd>• If a fight breaks out in the main cavern, the two bugbears in the rift climb up the ropes to join the fray.</dd>
-				<dd>• If two or more bugbears are killed, the doppelganger tries to retreat to area 19 to warn Nezznar.</dd>
-			<dt><h3 class="nobackground">Temple of Dumathoin</h3></dt>
-				<dd><b>Encounters:</b></dd>
-				<dd>&nbsp;&nbsp;&nbsp;&nbsp;• Nezznar the Black Spider</dd>
-				<dd>&nbsp;&nbsp;&nbsp;&nbsp;• 4 giant spiders</dd>
-				<dd>&nbsp;&nbsp;&nbsp;&nbsp;• Doppelganger (possible)</dd>
-				<dd>&nbsp;&nbsp;&nbsp;&nbsp;• Creatures from room 18 (possible)</dd>
-				<dd><b>Notes:</b></dd>
-				<dd>• If they are expecting the adventurers, the spiders hide behind the pillars and Nezznar casts invisibility on himself.  Make a stealth check for the spiders.  When intruders appear, the spiders try to entangle them in webs before closing to melee range.</dd>
-				<dd>• If creatures from room 18 can hear sounds in this room, they arrive 3 rounds after and act immediately.</dd>
-		</dl>
-
-		
-		<br>
-		<h2 id="tyrannyofdragons">
-			Tyranny of Dragons
-		</h2>
-		<dl>
-		<dt><h3 class="nobackground">Hoard of the Dragon Queen</h3></dt>
-		<dd><i>This is for adventurers of levels 1-8.</i></dd>
-		</dl>
-		<br /><br />
-
-		<table id="greenestencounters">
-			<tr>
-				<th colspan="3">
-					<h3 class="nobackground">
-						Greenest Encounters
-					</h3>
-				</th>
-			</tr>
-			<tr>
-				<th>
-					d8
-				</th>
-				<th>
-					Encounter
-				</th>
-			</tr>
-			<tr>
-				<td>
-					1
-				</td>
-				<td>
-					6 kobolds
-				</td>
-			</tr>
-			<tr>
-				<td>
-					2
-				</td>
-				<td>
-					1 kobolds, 1 ambush drake
-				</td>
-			</tr>
-			<tr>
-				<td>
-					3
-				</td>
-				<td>
-					6 cultists
-				</td>
-			</tr>
-			<tr>
-				<td>
-					4
-				</td>
-				<td>
-					4 cultists and 1 guard
-				</td>
-			</tr>
-			<tr>
-				<td>
-					5
-				</td>
-				<td>
-					2 cultists and 1 acolyte<sup>*</sup>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					6
-				</td>
-				<td>
-					3 guards and 1 acolyte<sup>*</sup>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					7
-				</td>
-				<td>
-					1d6 townsfolk being hunted by raiders (roll a d6 to determine raiding group)
-				</td>
-			</tr>
-			<tr>
-				<td>
-					8
-				</td>
-				<td>
-					1d6 townsfolk hiding
-				</td>
-			</tr>
-		</table>
-		<sup>*</sup> Acolytes have <i>command</i> prepared instead of <i>sanctuary</i>.
-		<br/>
-		<br/>
-		<br/>
-		<table id="wanderingmonsters">
-			<tr>
-				<th colspan="3">
-					<h3 class="nobackground">
-						Wandering Monsters
-					</h3>
-				</th>
-			</tr>
-			<tr>
-				<th>
-					d6
-				</th>
-				<th>
-					Encounter
-				</th>
-			</tr>
-			<tr>
-				<td>
-					1
-				</td>
-				<td>
-					4 kobolds
-				</td>
-			</tr>
-			<tr>
-				<td>
-					2
-				</td>
-				<td>
-					6 kobolds, 2 winged kobold
-				</td>
-			</tr>
-			<tr>
-				<td>
-					3
-				</td>
-				<td>
-					3 winged kobolds
-				</td>
-			</tr>
-			<tr>
-				<td>
-					4
-				</td>
-				<td>
-					5 winged kobolds
-				</td>
-			</tr>
-			<tr>
-				<td>
-					5
-				</td>
-				<td>
-					2 winged kobolds, 1 guard drake
-				</td>
-			</tr>
-			<tr>
-				<td>
-					6
-				</td>
-				<td>
-					2 ambush drakes
-				</td>
-			</tr>
-		</table>
-		<br/>
-		<br/>
-		<table id="hiringout">
-			<tr>
-				<th colspan="3">
-					<h3 class="nobackground">
-						Hiring Out
-					</h3>
-				</th>
-			</tr>
-			<tr>
-				<th>
-					d20
-				</th>
-				<th>
-					Result
-				</th>
-			</tr>
-			<tr>
-				<td>
-					0-5
-				</td>
-				<td>
-					No one is interested in hiring the character, but he or she can tag along as a traveler. Guards sometimes quit or die on the road and replacement has a chance to find employment.
-				</td>
-			</tr>
-			<tr>
-				<td>
-					6-10
-				</td>
-				<td>
-					Hired as a basic guard for 5 gp per tenday, plus food and living expenses on the road.
-				</td>
-			</tr>
-			<tr>
-				<td>
-					11-15
-				</td>
-				<td>
-					Hired as a sergeant for 8 gp per tenday, plus food and expenses on the road.
-				</td>
-			</tr>
-			<tr>
-				<td>
-					16+
-				</td>
-				<td>
-					Hired as a bodyguard for the merchant at 9 gp per tenday, plus food and expenses on the road.
-				</td>
-			</tr>
-		</table>
-		<br/>
-		<br/>
-		<table id="tradewayevents">
-			<tr>
-				<th colspan="3">
-					<h3 class="nobackground">
-						Trade Way Events
-					</h3>
-				</th>
-			</tr>
-			<tr>
-				<th>
-					d12
-				</th>
-				<th>
-					Event
-				</th>
-			</tr>
-			<tr>
-				<td>
-					1
-				</td>
-				<td>
-					Adventuring Life
-				</td>
-			</tr>
-			<tr>
-				<td>
-					2
-				</td>
-				<td>
-					Animal Abuse
-				</td>
-			</tr>
-			<tr>
-				<td>
-					3
-				</td>
-				<td>
-					Bane of the Mountains
-				</td>
-			</tr>
-			<tr>
-				<td>
-					4
-				</td>
-				<td>
-					Contraband
-				</td>
-			</tr>
-			<tr>
-				<td>
-					5
-				</td>
-				<td>
-					Everything Has a Price
-				</td>
-			</tr>
-			<tr>
-				<td>
-					6
-				</td>
-				<td>
-					Fungus Humongus
-				</td>
-			</tr>
-			<tr>
-				<td>
-					7
-				</td>
-				<td>
-					The Golden Hind
-				</td>
-			</tr>
-			<tr>
-				<td>
-					8
-				</td>
-				<td>
-					High Holy Day
-				</td>
-			</tr>
-			<tr>
-				<td>
-					9
-				</td>
-				<td>
-					No Room at the Inn
-				</td>
-			</tr>
-			<tr>
-				<td>
-					10
-				</td>
-				<td>
-					Roadside Hospitality
-				</td>
-			</tr>
-			<tr>
-				<td>
-					11
-				</td>
-				<td>
-					Spider Woods
-				</td>
-			</tr>
-			<tr>
-				<td>
-					12
-				</td>
-				<td>
-					Stranded
-				</td>
-			</tr>
-		</table>
-		<br/>
-		<br/>
-		<table id="encountersnorthofwaterdeep">
-			<tr>
-				<th colspan="3">
-					<h3 class="nobackground">
-						Encounters North of Waterdeep
-					</h3>
-				</th>
-			</tr>
-			<tr>
-				<th>
-					d20
-				</th>
-				<th>
-					Encounter
-				</th>
-			</tr>
-			<tr>
-				<td>
-					1-14
-				</td>
-				<td>
-					No Encounter
-				</td>
-			</tr>
-			<tr>
-				<td>
-					15
-				</td>
-				<td>
-					12 Human Bandits
-				</td>
-			</tr>
-			<tr>
-				<td>
-					16
-				</td>
-				<td>
-					1 troll
-				</td>
-			</tr>
-			<tr>
-				<td>
-					17
-				</td>
-				<td>
-					4 orcs, 1 ogre
-				</td>
-			</tr>
-			<tr>
-				<td>
-					18
-				</td>
-				<td>
-					2 ogre
-				</td>
-			</tr>
-			<tr>
-				<td>
-					19
-				</td>
-				<td>
-					3 lizardfolk and 3 giant lizards
-				</td>
-			</tr>
-			<tr>
-				<td>
-					20
-				</td>
-				<td>
-					6 lizardfolk
-				</td>
-			</tr>
-			<tr>
-				<td>
-					21
-				</td>
-				<td>
-					8 giant frogs
-				</td>
-			</tr>
-			<tr>
-				<td>
-					22
-				</td>
-				<td>
-					12 bullywugs
-				</td>
-			</tr>
-		</table>
-		<br/>
-		<br/>
-		<table id="mereofdeadmenencounters">
-			<tr>
-				<th colspan="3">
-					<h3 class="nobackground">
-						Mere of Dead Men Encounters
-					</h3>
-				</th>
-			</tr>
-			<tr>
-				<th>
-					d12
-				</th>
-				<th>
-					Encounter
-				</th>
-			</tr>
-			<tr>
-				<td>
-					1-2
-				</td>
-				<td>
-					Bullywugs (2-3 per character)
-				</td>
-			</tr>
-			<tr>
-				<td>
-					3
-				</td>
-				<td>
-					Crocodiles (2 per character)
-				</td>
-			</tr>
-			<tr>
-				<td>
-					4
-				</td>
-				<td>
-					Giant frogs (2 per character)
-				</td>
-			</tr>
-			<tr>
-				<td>
-					5
-				</td>
-				<td>
-					Giant lizards (2 per character)
-				</td>
-			</tr>
-			<tr>
-				<td>
-					6
-				</td>
-				<td>
-					Giant Spiders (1 per character)
-				</td>
-			</tr>
-			<tr>
-				<td>
-					7-8
-				</td>
-				<td>
-					Lizardfolk (3 per 2 characters)
-				</td>
-			</tr>
-			<tr>
-				<td>
-					9
-				</td>
-				<td>
-					Quicksand
-				</td>
-			</tr>
-			<tr>
-				<td>
-					10
-				</td>
-				<td>
-					Shambling mound
-				</td>
-			</tr>
-			<tr>
-				<td>
-					11
-				</td>
-				<td>
-					Will-o-wisps (3)
-				</td>
-			</tr>
-			<tr>
-				<td>
-					12
-				</td>
-				<td>
-					Yuan-ti
-				</td>
-			</tr>
-		</table>
-		<br/>
-		<br/>
-		<dl>
-		<dt><h3 class="nobackground" id="Rise-of-Tiamat">The Rise of Tiamat</h3></dt>
-		<dd><i>This is for adventurers of levels 8-15.</i></dd>
-		</dl>
-		Coming Soon!
-		<br /><br />
-
-		<h2 id="Elemental-Evil">Elemental Evil</h2>
-		<dl>
-		<dt><h3 class="nobackground">Princes of the Apocalypse</h3></dt>
-		<dd><i>This is for adventurers of levels 1-15.</i></dd>
-		</dl>
-		Coming soon!-->
-		<br /><br />
+		<br />
 		</div>
 	</div>
 		<script src="jquery-1.12.0.min.js"></script>
@@ -16769,8 +15473,11 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
 		<script>
 			       //Executes your code when the DOM is ready.  Acts the same as $(document).ready().
               $(function() {
+				 var toc = $("#toc").tocify({ 
+					 selectors: "h1, h2, h3, h4, h5" 
+					 }).data("toc-tocify");
                   //Calls the tocify method on your HTML div.
-                  $("#toc").tocify();
+                  $("#toc").tocify();				 
               });
 		</script>
 	</body>

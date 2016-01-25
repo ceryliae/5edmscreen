@@ -7,7 +7,8 @@
 .tocify {
     width: 20%;
     max-height: 90%;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
     margin-left: 1%;
     margin-top: 1%;
     position: fixed;
@@ -52,10 +53,13 @@
     text-indent: 40px;
 }
 
-.tocify-subheader .tocify-subheader .tocify-subheader {
+.tocify-subheader .tocify-subheader .tocify-subheader .tocify-subheader{
     text-indent: 50px;
 }
 
+.tocify-subheader .tocify-subheader .tocify-subheader .tocify-subheader .tocify-subheader{
+    text-indent: 60px;
+}
 /* Twitter Bootstrap Override Style */
 .nav-list > li > a, .nav-list .nav-header {
     margin: 0px;
