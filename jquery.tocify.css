@@ -9,13 +9,10 @@
     max-height: 90%;
     overflow-x: hidden;
     overflow-y: auto;
-    margin-left: 1%;
-    margin-top: 1%;
+    margin-left: 30px;
+    margin-top: 100px;
     position: fixed;
-    border: 1px solid #ccc;
-    webkit-border-radius: 6px;
-    moz-border-radius: 6px;
-    border-radius: 6px;
+
 }
 
 /* The Table of Contents is composed of multiple nested unordered lists.  These styles remove the default styling of an unordered list because it is ugly. */
@@ -25,6 +22,7 @@
     padding: 0;
     border: none;
     line-height: 30px;
+    
 }
 
 /* Top level header elements */
@@ -68,4 +66,6 @@
 /* Twitter Bootstrap Override Style */
 .nav-list > li > a {
     padding: 5px;
+    color: #581a0f;
+    font-weight: 600;
 }

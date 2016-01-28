@@ -1,0 +1,168 @@
+<html>
+	<head>
+		<meta content="text/html; charset=utf-8" http-equiv="content-type">
+        <link type="text/css" rel="stylesheet" href="jquery.tocify.css" />
+        <link type="text/css" rel="stylesheet" href="bootstrap.css" />
+		<title>Online DM Screen - Changelog</title>
+		<style media="screen" type="text/css">
+		html, body {
+			background-color: #e9dec3;
+			margin: 0;
+			padding: 0;
+		}
+		dt { background-color:#CAAD6B; }
+		h3 { padding:0; margin:0;}
+		table.noborder, td.noborder { border-style: none;}
+		.nobackground { background:rgba(0,0,0,0);}
+		td { border: 1px solid #CAAD6B;}
+		th { border: 1px solid #CAAD6B; background-color: #CAAD6B;}
+
+		/* For smaller table font */
+		.small-font table tr td {
+			padding:0px 0px 0px 0px;
+			font-size: 10px;
+		}
+
+		.small-font th {
+			font-size: 10px;
+		}
+
+	/* This is for the version number in the upper right hand corner */
+		.ribbon {
+		    background: #581A0F;
+		    border-left: 1px groove #CAAD6B;
+    		border-right: 1px groove #CAAD6B;
+		    border-radius: 5px 5px 0px 0px; 
+		    box-shadow: 5px 0 0 #581A0F,
+		                -5px 0 0 #581A0F;
+		    height: 52px;
+		    margin: 0 5px;
+		    position: relative;
+		    float: right;
+		    top: 40px;
+		    right: 7px;
+		    width: 40px;
+		    z-index: 1;
+		    -webkit-filter: drop-shadow(0 2px 5px hsla(0,0%,0%,.5));
+		}
+			/* Uncomment to give a banner effect */
+			
+		.ribbon:after,
+		.ribbon:before {
+		    border-top: 10px solid #581A0F;
+		    content: '';
+		    height: 0;
+		    position: absolute;
+		    top: 100%;
+		    width: 0;
+		    z-index: 1;
+		}
+		.ribbon:after {
+		    border-left: 27px solid transparent;
+		    right: -6px;
+		    z-index: 1;
+		}
+		.ribbon:before {
+		    border-right: 27px solid transparent;
+		    z-index: 1;
+		    left: -6px;
+		}
+			/* This centers text in the banner */
+		.ribbon-text {
+			position: absolute;
+		    top: 40%;
+		    left: 50%;
+		    height: 30%;
+		    width: 50%;
+		    margin: -15% 0 0 -47%;
+		    font-weight: bold;
+		    font-size: 10px;
+		    color: #f0f0f0;
+		    text-align: center;
+		}
+			
+		.behind { position: relative;
+			z-index: 0; 
+			padding-top: 5px;
+			background-color: #e9dec3;
+		}		   		
+	@media (max-width: 600px) {
+		#toc {
+			position: relative;
+			width: 100%;
+			margin: 0px 0px 20px 0px;
+		}
+	}
+	
+
+	
+h1 { font-family:"MrsEavesSmallCaps"; font-weight:normal; font-size:30px; color: #581A0F; padding:0px 0px; margin: 16px 0px 4px 0px; }
+
+h2 { font-family:"MrsEavesSmallCaps"; font-weight:normal; font-size:24px; color: #581A0F; border-bottom: 2px solid #CAAD6B; line-height:80%; margin: 10px 50% 4px 0px; }
+
+h3 { font-family:"MrsEavesSmallCaps"; font-weight:normal; font-size:18px; color: #581A0F; margin: 7px 0px 0px 0px; }
+
+h4 { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight:normal; font-size:16px; color: black; margin: 2px 2px 0px 0px; }
+
+		</style>
+		
+	</head>
+	<body>
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span3">
+<nav class="navbar navbar-default navbar-fixed-top">
+   <div>
+      <ul class = "nav navbar-nav">
+         <li><a href="http://ceryliae.github.io/5edmscreen/index">Home</a></li>
+         <li><a href = "http://ceryliae.github.io/5edmscreen/mobile">Mobile</a></li>
+         <li class = "active"><a href = "http://ceryliae.github.io/5edmscreen/changelog">Changelog</a></li>
+         <li><a href = "http://ceryliae.github.io/5edmscreen/contact">Contact</a></li>
+			
+      </ul>
+   </div>
+   
+</nav>
+          <div id="toc">
+          </div>
+		</div>
+   <div class="span9">
+		<div style="position: relative;">
+            <br>           
+            <h1>Version 0.3.3 - January 28th, 2016</h1>
+            <li>Updated Table of Contents CSS</li>
+            <li>Added navbar</li>
+            <li>Added changelog and contact pages</li>
+            <li>Removed link to mobile because of navbar</li>
+        </div>
+    </div>
+    
+
+            
+            
+            
+		<script src="jquery-1.12.0.min.js"></script>
+		<script src="jquery-ui.min.js"></script>
+		<script src="jquery.tocify.min.js""></script>
+		<script>
+			       //Executes your code when the DOM is ready.  Acts the same as $(document).ready().
+              $(function() {
+				 var toc = $("#toc").tocify({ 
+					 selectors: "h1, h2, h3, h4, h5" 
+					 }).data("toc-tocify");
+                  //Calls the tocify method on your HTML div.
+                  $("#toc").tocify();				 
+              });
+		</script>
+	<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	
+	ga('create', 'UA-72843823-1', 'auto');
+	ga('send', 'pageview');
+	
+	</script>
+    </body>
+</html>
