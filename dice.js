@@ -1,18 +1,23 @@
 function getDice(table) {
+	var diceCell = getDiceCell(table);
+	if (diceCell === undefined)
+		return undefined;
+	
+	var diceText = diceCell.text().trim();
+	return parseInt(diceText.replace('d', ''));
+}
+
+function getDiceCell(table) {
 	var possibleDiceCells = $(table).find('th:first-child');
-	var diceText = undefined;
+	var cell = undefined;
 	possibleDiceCells.each(function () {
 		var text = $(this).text().trim();
 		if (/^d\d+$/.test(text)) {
-			diceText = text;
+			cell = $(this);
 			return false;
 		}
 	});
-	
-	if (diceText === undefined)
-		return undefined;
-	
-	return parseInt(diceText.replace('d', ''));
+	return cell;
 }
 
 function rollDice(maxValue) {
@@ -43,7 +48,7 @@ function rollTable(table) {
 		return false;
 	});
 
-	return output;
+	return value + ':  ' + output;
 }
 
 function rollLink(link) {
@@ -54,11 +59,11 @@ function rollLink(link) {
 function setupDiceTables() {
 	$('table').each(function () {
 		// only dice tables should be modified
-		if (getDice(this) === undefined)
+		var diceCell = getDiceCell(this);
+		if (diceCell === undefined)
 			return true;
 		
-		var cell = $(this).find('tr').first().find('th').last();
-		cell.css('position', 'relative');
-		cell.append('<a href="#" onclick="rollLink(this); return false;" style="position:absolute; right:-32px">roll</a>');
+		var diceText = diceCell.text().trim();
+		diceCell.html('<a href="#" onclick="rollLink(this); return false;">' + diceText + '</a>');
 	});
 }
