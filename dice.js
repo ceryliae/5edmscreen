@@ -44,7 +44,7 @@ function rollTable(table) {
 		if (value < min || value > max)
 			return true;
 
-		output = $(this).find('td').last().text();
+		output = $(this).find('td').last().text().trim();
 		return false;
 	});
 
