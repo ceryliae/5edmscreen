@@ -14461,6 +14461,7 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
 		<script src="jquery-1.12.0.min.js"></script>
 		<script src="jquery-ui.min.js"></script>
 		<script src="jquery.tocify.min.js""></script>
+		<script src="dice.js""></script>
 		<script>
 			       //Executes your code when the DOM is ready.  Acts the same as $(document).ready().
               $(function() {
@@ -14469,6 +14470,9 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
 					 }).data("toc-tocify");
                   //Calls the tocify method on your HTML div.
                   $("#toc").tocify();				 
+
+                  //Adds "roll" link to each table containing dice values
+                  setupDiceTables();				  
               });
 		</script>
 	<script>
