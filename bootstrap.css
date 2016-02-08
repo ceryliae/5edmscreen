@@ -3948,6 +3948,8 @@ input[type="submit"].btn.btn-mini {
   margin-bottom: 20px;
   margin-left: 0;
   list-style: none;
+  width:100%
+  
 }
 
 .nav > li > a {
@@ -4597,6 +4599,8 @@ input[type="submit"].btn.btn-mini {
   display: block;
   float: left;
   margin: 0 10px 0 0;
+  background: #581A0F;
+
 }
 
 .navbar .nav.pull-right {
@@ -4611,7 +4615,7 @@ input[type="submit"].btn.btn-mini {
 .navbar .nav > li > a {
   float: none;
   padding: 10px 15px 10px;
-  color: #581A0F;
+  color: #cfb579;  
   text-decoration: none;
   font-weight: bold;
   background-color: transparent;  
@@ -4623,20 +4627,17 @@ input[type="submit"].btn.btn-mini {
 
 .navbar .nav > li > a:focus,
 .navbar .nav > li > a:hover {
-  color: #333333;
   text-decoration: none;
-  background-color: #cfb579;  
+  color: #581A0F;
+  background-color: #cfb579;
 }
 
 .navbar .nav > .active > a,
 .navbar .nav > .active > a:hover,
 .navbar .nav > .active > a:focus {
-  color: #cfb579;
+  color: #581A0F;
   text-decoration: none;
-  background-color: #581A0F;
-  -webkit-box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125);
-     -moz-box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125);
-          box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125);
+  background-color: #cfb579;
 }
 
 .navbar .btn-navbar {
