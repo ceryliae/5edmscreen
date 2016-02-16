@@ -23,7 +23,7 @@
 			}
 			td { 
 				border: 1px solid #CAAD6B;
-                padding: 1px;
+                padding: 2px;
 			}
 			th { 
 				border: 1px solid #CAAD6B; 
@@ -142,35 +142,182 @@
 				width: 100%;
 				margin: 0px 0px 20px 0px;
 			}
+
+
 		</style>
+<script language="JavaScript">
+
+var n = 0;
+function findInPage(str) {
+    var txt, i, found;
+    if (str == "") {
+        return false; 
+    }
+    // Find next occurance of the given string on the page, wrap around to the
+    // start of the page if necessary.
+    if (window.find) {
+        // Look for match starting at the current point. If not found, rewind
+        // back to the first match.
+        if (!window.find(str)) {
+            while (window.find(str, false, true)) {
+                n++;
+            }
+        } else {
+            n++;
+        }
+        // If not found in either direction, give message.
+        if (n == 0) {
+            alert("Not found.");
+        }
+    } else if (window.document.body.createTextRange) {
+        txt = window.document.body.createTextRange();
+        // Find the nth match from the top of the page.
+        found = true;
+        i = 0;
+        while (found === true && i <= n) {
+            found = txt.findText(str);
+            if (found) {
+                txt.moveStart("character", 1);
+                txt.moveEnd("textedit");
+            }
+            i += 1;
+        }
+        // If found, mark it and scroll it into view.
+        if (found) {
+            txt.moveStart("character", -1);
+            txt.findText(str);
+            txt.select();
+            txt.scrollIntoView();
+            n++;
+        } else {
+            // Otherwise, start over at the top of the page and find first match.
+            if (n > 0) {
+                n = 0;
+                findInPage(str);
+            }
+            // Not found anywhere, give message. else
+            alert("Not found.");
+        }
+    }
+    return false;
+}
+
+
+
+</script>
+<script language="javascript">
+(function(document, history, location) {
+  var HISTORY_SUPPORT = !!(history && history.pushState);
+
+  var anchorScrolls = {
+    ANCHOR_REGEX: /^#[^ ]+$/,
+    OFFSET_HEIGHT_PX: 50,
+
+    /**
+     * Establish events, and fix initial scroll position if a hash is provided.
+     */
+    init: function() {
+      this.scrollIfAnchor(location.hash);
+      document.body.addEventListener('click', this.delegateAnchors.bind(this));
+    },
+
+    /**
+     * Return the offset amount to deduct from the normal scroll position.
+     * Modify as appropriate to allow for dynamic calculations
+     */
+    getFixedOffset: function() {
+      return this.OFFSET_HEIGHT_PX;
+    },
+
+    /**
+     * If the provided href is an anchor which resolves to an element on the
+     * page, scroll to it.
+     * @param  {String} href
+     * @return {Boolean} - Was the href an anchor.
+     */
+    scrollIfAnchor: function(href, pushToHistory) {
+      var match, rect, anchorOffset;
+
+      if(!this.ANCHOR_REGEX.test(href)) {
+        return false;
+      }
+
+      match = document.getElementById(href.slice(1));
+
+      if(match) {
+        rect = match.getBoundingClientRect();
+        anchorOffset = window.pageYOffset + rect.top - this.getFixedOffset();
+        window.scrollTo(window.pageXOffset, anchorOffset);
+
+        // Add the state to history as-per normal anchor links
+        if(HISTORY_SUPPORT && pushToHistory) {
+          history.pushState({}, document.title, location.pathname + href);
+        }
+      }
+
+      return !!match;
+    },
+
+    /**
+     * If the click event's target was an anchor, fix the scroll position.
+     */
+    delegateAnchors: function(e) {
+      var elem = e.target;
+
+      if(
+        elem.nodeName === 'A' &&
+        this.scrollIfAnchor(elem.getAttribute('href'), true)
+      ) {
+        e.preventDefault();
+      }
+    }
+  };
+
+  window.addEventListener(
+    "DOMContentLoaded", anchorScrolls.init.bind(anchorScrolls)
+  );
+})(window.document, window.history, window.location);
+</script>
 	</head>
 	<body>
-	<div class="container-fluid">
-		<div class="row-fluid">
-			<div class="span3">
-				<nav class="navbar navbar-default navbar-fixed-top">
-					<div>
-					<ul class = "nav navbar-nav">
-                         <li class = "active"><a href= "index">Home</a></li>
-                         <li><a href = "mobile">Mobile</a></li>
-                         <li><a href = "changelog">Changelog</a></li>       
-                         <li><a href = "donate">Donate</a></li>
-                         <li><a href = "contact">Contact</a></li>
-                    </ul>
-                        				<div class="ribbon">
-					<div class="ribbon-text">Version<br />&nbsp;&nbsp;1.0.0</div>
-				</div>	  
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span3">
+                <nav class="navbar navbar-default navbar-fixed-top">
+                    <div>
+                        <ul class = "nav navbar-nav">
+                            <li class = "active"><a href= "index">Home</a></li>
+                            <li><a href = "mobile">Mobile</a></li>
+                            <li><a href = "changelog">Changelog</a></li>       
+                            <li><a href = "donate">Donate</a></li>
+                            <li><a href = "contact">Contact</a></li>
+                            <form id="f1" class="navbar-form navbar-left" name="f1" action="javascript:void()" onsubmit="if(this.t1.value!=null &amp;&amp; this.t1.value!='')
+                                                                                                                         parent.findInPage(this.t1.value);return false;">
+                            
+                                <div class="input-group"> 
+                                    <!--<button type="submit" class="btn" name="b1" form="f1">
+                                      <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                    </button>-->
+                                    <input type="search" class="form-control" id="t1" name="t1" placeholder="Hit enter to search" />
+                                </div>
+                            </form>
+                                </ul>
+        <div class="ribbon">
+        <div class="ribbon-text">Version<br />&nbsp;&nbsp;1.1.0</div>
+            </div>
+            </div>
+            </nav>
 
-					</div>  
-				</nav>
 				<div id="toc"></div>
+
 			</div>
 		<div class="span9">
 			<div style="position: relative;">
 <br>
+
 		<h1 id="abilityscores">Abilities</h1>
 		<h2 id="skills">Skill Checks</h2>
-		<h3>Ability Modifiers</h3>
+		<h3 id="abilitymodifiers">Ability Modifiers</h3>
 		<table>
 			<tr>
 				<th>Score</th>
@@ -1669,108 +1816,129 @@
 		<h2>Character XP Levels</h2>
 		<table id="characterlevel">
 			<tr>
-				<th width="40%">Experience Points</th>
-				<th width="30%">Level</th>
-				<th width="30%">Proficiency Bonus</th>
+				<th width>Level</th>                
+				<th width>XP to next level</th>     
+                <th width>Total XP</th>
+                <th width>Proficiency Bonus</th>
 			</tr>
 			<tr>
-				<td align="left">0</td>
 				<td align="left">1</td>
+                <td align="left">300</td>                
+                <td align="left">0</td>
 				<td align="left">+2</td>
 			</tr>
 			<tr>
+                <td align="left">2</td>
+				<td align="left">600</td>
 				<td align="left">300</td>
-				<td align="left">2</td>
 				<td align="left">+2</td>
 			</tr>
 			<tr>
+                <td align="left">3</td>
+				<td align="left">1,800</td>
 				<td align="left">900</td>
-				<td align="left">3</td>
 				<td align="left">+2</td>
 			</tr>
 			<tr>
+                <td align="left">4</td>
+				<td align="left">3,800</td>
 				<td align="left">2,700</td>
-				<td align="left">4</td>
-				<td align="left">+2</td>
+                <td align="left">+2</td>
 			</tr>
 			<tr>
-				<td align="left">6,500</td>
 				<td align="left">5</td>
-				<td align="left">+3</td>
+				<td align="left">7,500</td>
+				<td align="left">6,500</td>
+                <td align="left">+3</td>
 			</tr>
 			<tr>
-				<td align="left">14,000</td>
 				<td align="left">6</td>
-				<td align="left">+3</td>
+				<td align="left">9,000</td>
+				<td align="left">14,000</td>
+                <td align="left">+3</td>
 			</tr>
 			<tr>
-				<td align="left">23,000</td>
 				<td align="left">7</td>
-				<td align="left">+3</td>
+				<td align="left">11,000</td>
+				<td align="left">23,000</td>
+                <td align="left">+3</td>
 			</tr>
 			<tr>
-				<td align="left">34,000</td>
 				<td align="left">8</td>
-				<td align="left">+3</td>
+				<td align="left">14,000</td>
+				<td align="left">34,000</td>
+                <td align="left">+3</td>
 			</tr>
 			<tr>
-				<td align="left">48,000</td>
 				<td align="left">9</td>
-				<td align="left">+4</td>
+				<td align="left">16,000</td>
+				<td align="left">48,000</td>
+                <td align="left">+4</td>
 			</tr>
 			<tr>
-				<td align="left">64,000</td>
 				<td align="left">10</td>
-				<td align="left">+4</td>
+				<td align="left">21,000</td>
+				<td align="left">64,000</td>
+                <td align="left">+4</td>
 			</tr>
 			<tr>
-				<td align="left">85,000</td>
 				<td align="left">11</td>
-				<td align="left">+4</td>
+				<td align="left">15,000</td>
+				<td align="left">85,000</td>
+                <td align="left">+4</td>
 			</tr>
 			<tr>
-				<td align="left">100,000</td>
 				<td align="left">12</td>
-				<td align="left">+4</td>
+				<td align="left">20,000</td>
+				<td align="left">100,000</td>
+                <td align="left">+4</td>
 			</tr>
 			<tr>
-				<td align="left">120,000</td>
 				<td align="left">13</td>
-				<td align="left">+5</td>
+				<td align="left">20,000</td>
+				<td align="left">120,000</td>
+                <td align="left">+5</td>
 			</tr>
 			<tr>
-				<td align="left">140,000</td>
 				<td align="left">14</td>
-				<td align="left">+5</td>
+				<td align="left">20,000</td>
+				<td align="left">140,000</td>
+                <td align="left">+5</td>
 			</tr>
 			<tr>
-				<td align="left">165,000</td>
 				<td align="left">15</td>
-				<td align="left">+5</td>
+				<td align="left">25,000</td>
+				<td align="left">165,000</td>
+                <td align="left">+5</td>
 			</tr>
 			<tr>
-				<td align="left">195,000</td>
 				<td align="left">16</td>
-				<td align="left">+5</td>
+				<td align="left">30,000</td>
+				<td align="left">195,000</td>
+                <td align="left">+5</td>
 			</tr>
 			<tr>
-				<td align="left">225,000</td>
 				<td align="left">17</td>
-				<td align="left">+6</td>
+				<td align="left">30,000</td>
+				<td align="left">225,000</td>
+                <td align="left">+6</td>
 			</tr>
 			<tr>
-				<td align="left">265,000</td>
 				<td align="left">18</td>
-				<td align="left">+6</td>
+				<td align="left">40,000</td>
+				<td align="left">265,000</td>
+                <td align="left">+6</td>
 			</tr>
 			<tr>
-				<td align="left">305,000	</td>
 				<td align="left">19</td>
-				<td align="left">+6</td>
+				<td align="left">50,000</td>
+				<td align="left">305,000</td>
+                <td align="left">+6</td>
 			</tr>
 			<tr>
-				<td align="left">355,000</td>
 				<td align="left">20</td>
+				<td align="center">&mdash;</td>
+				<td align="left">355,000</td>
 				<td align="left">+6</td>
 			</tr>
 		</table>
@@ -1835,7 +2003,7 @@
 				<th>Pay</th>
 			</tr>
 			<tr>
-				<td colspan="2">Coach Cab</td>
+                <td colspan="2"><i>Coach Cab</i></td>
 			</tr>
 			<tr>
 				<td align="left">&nbsp;&nbsp;&nbsp;&nbsp;Between Towns</td>
@@ -1843,10 +2011,10 @@
 			</tr>
 			<tr>
 				<td align="left">Within a City</td>
-				<td align="left">1 cp</td>
+				<td align="left">&nbsp;&nbsp;&nbsp;&nbsp;1 cp</td>
 			</tr>
 			<tr>
-				<td colspan="2">Hireling</td>
+                <td colspan="2"><i>Hireling</i></td>
 			</tr>
 			<tr>
 				<td align="left">&nbsp;&nbsp;&nbsp;&nbsp;Skilled</td>
@@ -2029,26 +2197,108 @@
 <br>
         <h2 id="items">Items Lists</h1><br />
         <table id="armor">
-			<tr><th class="nobackground" align="left" colspan="4"><h3 >Basic Armor</h3></th></tr>
-            <tr><th>Armor</th><th align="right" width="20%">Cost</th><th width="20%">AC</th><th align="right" width="20%">Weight</th></tr>
-            <tr><td colspan="4"><i>Light Armor</i></td></tr>
-            <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;Padded²</td><td align="right">5 gp</td><td>11</td><td align="right">8 lb.</td></tr>
-            <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;Leather</td><td align="right">10 gp</td><td>11</td><td align="right">10 lb.</td></tr>
-            <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;Studded leather</td><td align="right">45 gp</td><td>12</td><td align="right">13 lb.</td></tr>
-            <tr><td colspan="4"><i>Medium Armor</i></td></tr>
-            <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;Hide</td><td align="right">10 gp</td><td>12</td><td align="right">12 lb.</td></tr>
-            <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;Chain shirt</td><td align="right">50 gp</td><td>13</td><td align="right">20 lb.</td></tr>
-            <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;Scale mail²</td><td align="right">50 gp</td><td>14</td><td align="right">45 lb.</td></tr>
-            <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;Breastplate</td><td align="right">400 gp</td><td>14</td><td align="right">20 lb.</td></tr>
-            <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;Half plate²</td><td align="right">750 gp</td><td>15</td><td align="right">40 lb.</td></tr>
-            <tr><td colspan="4"><i>Heavy Armor</i></td></tr>
-            <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;Ring mail²</td><td align="right">30 gp</td><td>14</td><td align="right">40 lb.</td></tr>
-            <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;Chain mail²</td><td align="right">75 gp</td><td>16</td><td align="right">55 lb.</td></tr>
-            <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;Splint²</td><td align="right">200 gp</td><td>17</td><td align="right">60 lb.</td></tr>
-            <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;Plate²</td><td align="right">1,500 gp</td><td>18</td><td align="right">65 lb.</td></tr>
-            <tr><td colspan="4"><i>Shield</i></td></tr>
-            <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;Shield</td><td align="right">10 gp</td><td>+2</td><td align="right">6 lb.</td></tr>
-        </table>
+			<tr>
+				<th class="nobackground" align="left" colspan="4">
+					<h3 >Basic Armor</h3>
+				</th>
+			</tr>
+			<tr>
+				<th>Armor</th>
+				<th align="center" width="20%">Cost</th>
+				<th width="20%">AC</th>
+				<th align="right" width="20%">Weight</th>
+			</tr>
+			<tr>
+				<td colspan="4"><i>Light Armor</i></td>
+			</tr>
+			<tr>
+				<td>&nbsp;&nbsp;&nbsp;&nbsp;Padded²</td>
+				<td align="right">5 gp</td>
+				<td>11 + Dex mod</td>
+				<td align="right">8 lb.</td>
+			</tr>
+			<tr>
+				<td>&nbsp;&nbsp;&nbsp;&nbsp;Leather</td>
+				<td align="right">10 gp</td>
+				<td>11 + Dex mod</td>
+				<td align="right">10 lb.</td>
+			</tr>
+			<tr>
+				<td>&nbsp;&nbsp;&nbsp;&nbsp;Studded leather</td>
+				<td align="right">45 gp</td>
+				<td>12 + Dex mod</td>
+				<td align="right">13 lb.</td>
+			</tr>
+			<tr>
+				<td colspan="4"><i>Medium Armor</i></td>
+			</tr>
+			<tr>
+				<td>&nbsp;&nbsp;&nbsp;&nbsp;Hide</td>
+				<td align="right">10 gp</td>
+				<td>12 + Dex mod (Max 2)</td>
+                <td align="right">12 lb.</td>
+			</tr>
+			<tr>
+				<td>&nbsp;&nbsp;&nbsp;&nbsp;Chain shirt</td>
+				<td align="right">50 gp</td>
+				<td>13 + Dex mod (Max 2)</td>
+				<td align="right">20 lb.</td>
+			</tr>
+			<tr>
+				<td>&nbsp;&nbsp;&nbsp;&nbsp;Scale mail²</td>
+				<td align="right">50 gp</td>
+				<td>14 + Dex mod (Max 2)</td>
+				<td align="right">45 lb.</td>
+			</tr>
+			<tr>
+				<td>&nbsp;&nbsp;&nbsp;&nbsp;Breastplate</td>
+				<td align="right">400 gp</td>
+				<td>14 + Dex mod (Max 2)</td>
+				<td align="right">20 lb.</td>
+			</tr>
+			<tr>
+				<td>&nbsp;&nbsp;&nbsp;&nbsp;Half plate²</td>
+				<td align="right">750 gp</td>
+				<td>15 + Dex mod (Max 2)</td>
+				<td align="right">40 lb.</td>
+			</tr>
+			<tr>
+				<td colspan="4"><i>Heavy Armor</i></td>
+			</tr>
+			<tr>
+				<td>&nbsp;&nbsp;&nbsp;&nbsp;Ring mail²</td>
+				<td align="right">30 gp</td>
+				<td>14</td>
+				<td align="right">40 lb.</td>
+			</tr>
+			<tr>
+				<td>&nbsp;&nbsp;&nbsp;&nbsp;Chain mail²</td>
+				<td align="right">75 gp</td>
+				<td>16</td>
+				<td align="right">55 lb.</td>
+			</tr>
+			<tr>
+				<td>&nbsp;&nbsp;&nbsp;&nbsp;Splint²</td>
+				<td align="right">200 gp</td>
+				<td>17</td>
+				<td align="right">60 lb.</td>
+			</tr>
+			<tr>
+				<td>&nbsp;&nbsp;&nbsp;&nbsp;Plate²</td>
+				<td align="right">1,500 gp</td>
+				<td>18</td>
+				<td align="right">65 lb.</td>
+			</tr>
+			<tr>
+				<td colspan="4"><i>Shield</i></td>
+			</tr>
+			<tr>
+				<td>&nbsp;&nbsp;&nbsp;&nbsp;Shield</td>
+				<td align="right">10 gp</td>
+				<td>+2</td>
+				<td align="right">6 lb.</td>
+			</tr>
+	</table>
 		        ² Disadvantage on Dexterity (Stealth) checks
 		<br />
 
@@ -3463,7 +3713,33 @@
 					<tr><td>Sylvan</td><td>Fey creatures</td><td>Elvish</td></tr>	
 					<tr><td>Undercommon</td><td>Underdark traders</td><td>Elvish</td></tr>	
 				</table>
-				<h1 id="randomtables">Random Tables</h1>		 
+                <h2>Foraging</h2>  
+                <table>
+                    <tr>
+                        <th class="nobackground" colspan="2" align="left">
+                            <h3>Foraging DCs</h3>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>Food and Water Availbality</th>
+                        <th>Survival DC</th>
+                    </tr>
+                    <tr>
+                        <td>Abundant food and water</td>
+                        <td>10</td>
+                    </tr>
+                    <tr>
+                        <td>Limited food and water sources</td>
+                        <td>15</td>
+                    </tr>
+                    <tr>
+                        <td>Very little, if any, food and water souurces</td>
+                        <td>20</td>
+                    </tr>                   
+                </table>
+<br>
+                <p>If multiple charactes forage, each character makes a separate check. A foraging character finds nothing on a failure. On a successful check, roll 1d6 + wisdom modifier to determine how much food (in pounds) and water (in galloons) the character finds. Make a separate roll for food and water.</p>
+<h1 id="randomtables">Random Tables</h1>		 
 				<h2 id="quickfind">Quick Find</h2>
 				<table>
 					<tr>
@@ -9397,7 +9673,7 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
 <h2>Players Handbook</h2>
 <table>
   <tr id="phb-index-a">
-	 <th>A</th>
+	 <th><h4>A</h4></th>
   </tr>
   <tr>
     <td>0 hit points (hit points: dropping to 0), 197-198</td>
@@ -9805,7 +10081,7 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
     <td>Awakened Mind (warlock), 11O</td>
   </tr>
   <tr id="phb-index-b">
-	 <th>B</th>
+	 <th><h4>B</h4></th>
   </tr>
   <tr>
     <td>background, 11, 12, 13-14,</td>
@@ -10051,7 +10327,7 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
     <td>Bytopia (plane of existence), 302</td>
   </tr>
   <tr id="phb-index-c">
-	 <th>C</th>
+	 <th><h4>C</h4></th>
   </tr>
   <tr>
     <td>Calishite (human ethnicity), 30</td>
@@ -10504,7 +10780,7 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
     <td>cylinder (area effect), 204</td>
   </tr>
   <tr id="phb-index-d">
-	 <th>D</th>
+	 <th><h4>D</h4></th>
   </tr>
   <tr>
     <td>damage, 14, 196-197</td>
@@ -10993,7 +11269,7 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;language, 20, 123</td>
   </tr>
   <tr id="phb-index-e">
-	 <th>E</th>
+	 <th><h4>E</h4></th>
   </tr>
   <tr>
     <td>eagle, giant (creature), 306</td>
@@ -11308,7 +11584,7 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;half-elf, 39</td>
   </tr>
   <tr id="phb-index-f">
-	 <th>F</th>
+	 <th><h4>F</h4></th>
   </tr>
   <tr>
     <td>Fey Presence (warlock), 108</td>
@@ -11452,7 +11728,7 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
     <td>frog (creature), 305</td>
   </tr>
   <tr id="phb-index-g">
-	 <th>G</th>
+	 <th><h4>G</h4></th>
   </tr>
   <tr>
     <td>gaining a level, 15</td>
@@ -11566,7 +11842,7 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
     <td>guild merchant (background), 133</td>
   </tr>
   <tr id="phb-index-h">
-	 <th>H</th>
+	 <th><h4>H</h4></th>
   </tr>
   <tr>
     <td>Hades (plane of existence), 302</td>
@@ -11794,7 +12070,7 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
     <td>Hypnotic Gaze (wizard), 117</td>
   </tr>
   <tr id="phb-index-i">
-	 <th>I</th>
+	 <th><h4>I</h4></th>
   </tr>
   <tr>
     <td>ideals (personality), 124</td>
@@ -11935,7 +12211,7 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
     <td>Invoke Duplicity (Channel Divinity cleric option), 63</td>
   </tr>
   <tr id="phb-index-j">
-	 <th>J</th>
+	 <th><h4>J</h4></th>
   </tr>
   <tr>
     <td>Jack of All Trades (bard), 54</td>
@@ -11944,7 +12220,7 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
     <td>jumping (movement), 182, 190</td>
   </tr>
   <tr id="phb-index-k">
-	 <th>K</th>
+	 <th><h4>K</h4></th>
   </tr>
   <tr>
     <td>Keen Senses (elf), 23</td>
@@ -11980,7 +12256,7 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
     <td>Knowledge of the Ages (Channel Divinity cleric option), 59</td>
   </tr>
   <tr id="phb-index-l">
-	 <th>L</th>
+	 <th><h4>L</h4></th>
   </tr>
   <tr>
     <td>Land's Stride</td>
@@ -12109,7 +12385,7 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
     <td>Lunging Attack maneuver (fighter maneuver), 74</td>
   </tr>
   <tr id="phb-index-m">
-	 <th>M</th>
+	 <th><h4>M</h4></th>
   </tr>
   <tr>
     <td>Mage Hand Legerdemain (rogue), 98</td>
@@ -12499,7 +12775,7 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
     <td>Necromancy Savant (wizard), 118</td>
   </tr>
   <tr id="phb-index-n">
-	 <th>N</th>
+	 <th><h4>N</h4></th>
   </tr>
   <tr>
     <td>necrotic damage (damage type), 196</td>
@@ -12535,7 +12811,7 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
     <td>NPC (nonplayer character), 8, 159, 185, 189, 198</td>
   </tr>
   <tr id="phb-index-o">
-	 <th>O</th>
+	 <th><h4>O</h4></th>
   </tr>
   <tr>
     <td>Oath of Devotion (paladin sacred oath), 85-86</td>
@@ -12619,7 +12895,7 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
     <td>owl (creature), 308</td>
   </tr>
   <tr id="phb-index-p">
-	 <th>P</th>
+	 <th><h4>P</h4></th>
   </tr>
   <tr>
     <td>Pact Boon (warlock), 107-108</td>
@@ -12901,7 +13177,7 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
     <td>Pushing Attack maneuver (fighter maneuver), 74</td>
   </tr>
   <tr id="phb-index-q">
-	 <th>Q</th>
+	 <th><h4>Q</h4></th>
   </tr>
   <tr>
     <td>quasit (creature), 309</td>
@@ -12919,7 +13195,7 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
     <td>Quivering Palm (monk), 80</td>
   </tr>
   <tr id="phb-index-r">
-	 <th>R</th>
+	 <th><h4>R</h4></th>
   </tr>
   <tr>
     <td>race, 11</td>
@@ -13219,7 +13495,7 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
     <td>Rustic Hospitality (folk hero), 131</td>
   </tr>
   <tr id="phb-index-s">
-	 <th>S</th>
+	 <th><h4>S</h4></th>
   </tr>
   <tr>
     <td>Sacred Oath (paladin), 85</td>
@@ -13846,7 +14122,7 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
     <td>Sylvan (language), 123</td>
   </tr>
   <tr id="phb-index-t">
-	 <th>T</th>
+	 <th><h4>T</h4></th>
   </tr>
   <tr>
     <td>targeting a spell (casting a spell: targeting), 204</td>
@@ -14146,7 +14422,7 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ranger, 91</td>
   </tr>
   <tr id="phb-index-u">
-	 <th>U</th>
+	 <th><h4>U</h4></th>
   </tr>
   <tr>
     <td>unarmed (melee attack), 195</td>
@@ -14215,7 +14491,7 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
     <td>using this book, 6</td>
   </tr>
   <tr id="phb-index-v">
-	 <th>V</th>
+	 <th><h4>V</h4></th>
   </tr>
   <tr>
     <td>Vanish (ranger), 92</td>
@@ -14266,7 +14542,7 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
     <td>vulnerability (damage vulnerability), 197</td>
   </tr>
   <tr id="phb-index-w">
-	 <th>W</th>
+	 <th><h4>W</h4></th>
   </tr>
   <tr>
     <td>Wanderer (outlander), 136</td>
@@ -14437,38 +14713,2639 @@ Use <a href="#traps">these charts</a> to determine attack bonus, save DC, and da
     <td>Wrath of the Storm (cleric), 62</td>
   </tr>
   <tr id="phb-index-x">
-	 <th>X</th>
+	 <th><h4>X</h4></th>
   </tr>
   <tr>
     <td>XP (experience points), 15</td>
   </tr>
   <tr id="phb-index-y">
-	 <th>Y</th>
+	 <th><h4>Y</h4></th>
   </tr>
   <tr>
     <td>Ysgard (plane of existence), 302</td>
   </tr>
   <tr id="phb-index-z">
-	 <th>Z</th>
+	 <th><h4>Z</h4></th>
   </tr>
   <tr>
     <td>zombie (creature), 311</td>
   </tr>
-</table>		
-		<br />
+</table>	
+<br>
+<h2>DMG Index</h2>           
+<table>
+  <tr>
+    <th><h4>A</h4></th>
+  </tr>
+  <tr>
+    <td>aasimar, 286-287</td>
+  </tr>
+  <tr>
+    <td>abilities (NPC), 89, 92</td>
+  </tr>
+  <tr>
+    <td>ability check, 237-238, 245, 263-264</td>
+  </tr>
+  <tr>
+    <td>ability score, 89, 237-240, 242, 263-266</td>
+  </tr>
+  <tr>
+    <td>absent characters, 235-236, 260</td>
+  </tr>
+  <tr>
+    <td>Abyss, 58, 62-63</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Death Dells, 63</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Demonweb, The, 62</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Endless Maze, The, 63</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gaping Maw, The, 62</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Thanatos, 62</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Triple Realm, The, 63</td>
+  </tr>
+  <tr>
+    <td>Acheron (Outer Plane), 58, 66</td>
+  </tr>
+  <tr>
+    <td>action options, 271-272</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;climb onto a bigger creature, 271</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;disarm, 271</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mark, 271</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;overrun, 272</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;shove aside, 272</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tumble, 272</td>
+  </tr>
+  <tr>
+    <td>activating a magic item, 141</td>
+  </tr>
+  <tr>
+    <td>advantage, 239-240</td>
+  </tr>
+  <tr>
+    <td>adventure, 16, 25, 99-123, 125-126</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;creating, 5, 71-87, 99-105, 125-126</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hooks, 72</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;published, 72</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;seeds, 125-126</td>
+  </tr>
+  <tr>
+    <td>adventurer NPC, 93</td>
+  </tr>
+  <tr>
+    <td>adventuring day, 84</td>
+  </tr>
+  <tr>
+    <td>air quality, 105</td>
+  </tr>
+  <tr>
+    <td>air vehicles, 119</td>
+  </tr>
+  <tr>
+    <td>alien technology, 268</td>
+  </tr>
+  <tr>
+    <td>alternative rewards, 227-232</td>
+  </tr>
+  <tr>
+    <td>altitude, 110</td>
+  </tr>
+  <tr>
+    <td>animism, 12</td>
+  </tr>
+  <tr>
+    <td>antipaladin, 96, 97</td>
+  </tr>
+  <tr>
+    <td>appearance (NPC), 89</td>
+  </tr>
+  <tr>
+    <td>apprentice, 92-93</td>
+  </tr>
+  <tr>
+    <td>Arborea (Outer Plane), 58, 60-61</td>
+  </tr>
+  <tr>
+    <td>Arcadia (Outer Plane), 58, 66-67</td>
+  </tr>
+  <tr>
+    <td>arctic monsters, 302</td>
+  </tr>
+  <tr>
+    <td>area of effect, 249-250, 251</td>
+  </tr>
+  <tr>
+    <td>armor, magic, 139</td>
+  </tr>
+  <tr>
+    <td>artifacts, 219-227</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;destroying, 221</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;properties, 219-221</td>
+  </tr>
+  <tr>
+    <td>art objects, 133, 134-135</td>
+  </tr>
+  <tr>
+    <td>Astral color pools, 47</td>
+  </tr>
+  <tr>
+    <td>Astral Plane, 43, 46-48</td>
+  </tr>
+  <tr>
+    <td>astral projection, 47</td>
+  </tr>
+  <tr>
+    <td>atonement (paladin), 97</td>
+  </tr>
+  <tr>
+    <td>attack rolls, 235, 238, 239</td>
+  </tr>
+  <tr>
+    <td>attitude (NPC), 244</td>
+  </tr>
+  <tr>
+    <td>attunement, 136-138</td>
+  </tr>
+  <tr>
+    <td>automatic success (variant), 239</td>
+  </tr>
+  <tr>
+    <td>Avernus (Nine Hells), 64</td>
+  </tr>
+  <tr>
+    <td>awarding experience points, 260-261</td>
+  </tr>
+  <tr>
+    <th><h4>B</h4></th>
+  </tr>
+  <tr>
+    <td>background NPC, 94</td>
+  </tr>
+  <tr>
+    <td>backgrounds, 26, 264, 289</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;creating, 26, 289</td>
+  </tr>
+  <tr>
+    <td>barred doors, 103</td>
+  </tr>
+  <tr>
+    <td>Beastlands, The (Outer Plane), 58, 60</td>
+  </tr>
+  <tr>
+    <td>becoming lost, 111-112, 117-118</td>
+  </tr>
+  <tr>
+    <td>beginning an adventure, 72, 74, 77, 79</td>
+  </tr>
+  <tr>
+    <td>between adventures, 125-131</td>
+  </tr>
+  <tr>
+    <td>blessings, 227-228</td>
+  </tr>
+  <tr>
+    <td>bond (NPC), 91</td>
+  </tr>
+  <tr>
+    <td>Border Ethereal, 48</td>
+  </tr>
+  <tr>
+    <td>bringing back the dead, 24</td>
+  </tr>
+  <tr>
+    <td>brown mold, 105</td>
+  </tr>
+  <tr>
+    <td>businesses (character), 127, 129</td>
+  </tr>
+  <tr>
+    <td>buying magic items, 135-136</td>
+  </tr>
+  <tr>
+    <td>Bytopia (Outer Plane), 58, 59-60</td>
+  </tr>
+  <tr>
+    <th><h4>C</h4></th>
+  </tr>
+  <tr>
+    <td>campaign, 9, 25-41, 126</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;creating, 14, 25-41, 43-44, 125</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tracking, 126</td>
+  </tr>
+  <tr>
+    <td>Cania (Nine Hells), 65</td>
+  </tr>
+  <tr>
+    <td>Carceri (Outer Plane), 58, 63</td>
+  </tr>
+  <tr>
+    <td>challenge rating, 82, 92, 274, 274-275, 279, 306-309</td>
+  </tr>
+  <tr>
+    <td>charges in magic items, 141</td>
+  </tr>
+  <tr>
+    <td>charms, 228</td>
+  </tr>
+  <tr>
+    <td>chases, 252-255</td>
+  </tr>
+  <tr>
+    <td>city, 17</td>
+  </tr>
+  <tr>
+    <td>City of Brass, 55-56</td>
+  </tr>
+  <tr>
+    <td>class, 96-97, 283, 287-289</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NPC, 96-97</td>
+  </tr>
+  <tr>
+    <td>cleaving, 272</td>
+  </tr>
+  <tr>
+    <td>climax, 72, 75, 77</td>
+  </tr>
+  <tr>
+    <td>climb onto a bigger creature, 271</td>
+  </tr>
+  <tr>
+    <td>clues (mystery), 78</td>
+  </tr>
+  <tr>
+    <td>coastal monsters, 302</td>
+  </tr>
+  <tr>
+    <td>cold, 110</td>
+  </tr>
+  <tr>
+    <td>collapsing roof (trap), 122</td>
+  </tr>
+  <tr>
+    <td>color pools (Astral), 47</td>
+  </tr>
+  <tr>
+    <td>combat, 247-252, 270-273</td>
+  </tr>
+  <tr>
+    <td>combat encounter, 81-85</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;creating, 81-85</td>
+  </tr>
+  <tr>
+    <td>command word, 141</td>
+  </tr>
+  <tr>
+    <td>commerce, 19-20</td>
+  </tr>
+  <tr>
+    <td>complex traps, 121-122</td>
+  </tr>
+  <tr>
+    <td>complications, 79-81</td>
+  </tr>
+  <tr>
+    <td>concealed doors, 104</td>
+  </tr>
+  <tr>
+    <td>conditions, 248</td>
+  </tr>
+  <tr>
+    <td>conflict with a sentient item, 216</td>
+  </tr>
+  <tr>
+    <td>connecting adventures, 125-126</td>
+  </tr>
+  <tr>
+    <td>consumable magic items, 141</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;potions, 139, 140</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scrolls, 139, 140</td>
+  </tr>
+  <tr>
+    <td>contacts, 93-94</td>
+  </tr>
+  <tr>
+    <td>contests, 238</td>
+  </tr>
+  <tr>
+    <td>continent scale (map), 14</td>
+  </tr>
+  <tr>
+    <td>continuing campaign, 36</td>
+  </tr>
+  <tr>
+    <td>conversation, 244-245</td>
+  </tr>
+  <tr>
+    <td>cosmology, 43-44</td>
+  </tr>
+  <tr>
+    <td>cover, 251, 272</td>
+  </tr>
+  <tr>
+    <td>crafting a magic item, 128-129</td>
+  </tr>
+  <tr>
+    <td>creating a background, 26, 289</td>
+  </tr>
+  <tr>
+    <td>creating a campaign, 14, 25-41, 43-44, 125</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;character backgrounds, 26</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;characters, 26, 36</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;continuing or episodic, 36</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;creating a world, 4, 9-41</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ending, 33</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;events, 26-33</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;flavor, 38-41</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map, 14, 25-26</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;planes of existence, 43-44</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;play style, 34-36</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;story, 125</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;theme, 36</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;time, 32</td>
+  </tr>
+  <tr>
+    <td>creating a currency, 20</td>
+  </tr>
+  <tr>
+    <td>creating a downtime activity, 131</td>
+  </tr>
+  <tr>
+    <td>creating a dungeon, 72-73, 74, 99-105, 290-301</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;air quality, 105</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;creating an encounter, 81-85, 102</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;creator, 99-101</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ecology, 102</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;encounters, 102</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;factions, 101-102</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;features, 102-105</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;goals, 72-73</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hazards, 105</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;history, 101</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inhabitants, 74, 101-102</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;light, 104-105</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;location, 99</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map, 102-105, 311, 312, 314, 315</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;purpose, 101</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;random, 290-301</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;random encounters, 85-87, 106, 114-116, 118</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sounds, 105</td>
+  </tr>
+  <tr>
+    <td>creating a magic item, 214-216, 284-285</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sentient, 214-216</td>
+  </tr>
+  <tr>
+    <td>creating a monster, 273-283</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;class, 283</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;features, 280-281</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;quickly, 274-275</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stat block, 275-279</td>
+  </tr>
+  <tr>
+    <td>creating a multiverse, 43-69</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;creating a campaign, 14, 25-41, 43-44, 125</td>
+  </tr>
+  <tr>
+    <td>creating an adventure, 5, 71-87, 99-105, 125-126</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;adventure seeds, 125-126</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;character goals, 72-74, 76</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;climax, 72, 75, 77</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;complications, 79-81</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;creating a dungeon, 72-73, 74, 99-105, 290-301</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;creating an encounter, 81-85, 102</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dungeon, 99-105</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elements, 71-72</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;event-based, 75-77</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foreshadowing, 126</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;intrigue, 78</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;introduction, 72, 74, 77, 79</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;location-based, 72-75</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maps, 72, 75, 77</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;moral quandaries, 79-80</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mystery, 77-78</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NPCs, 74, 75-76, 77, 78</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;random encounters, 85-87, 106, 114-116, 118</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;side quests, 81</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;structure, 72</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;twists, 80</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type, 72-79</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;villain, 74, 75-76, 77, 78</td>
+  </tr>
+  <tr>
+    <td>creating an encounter, 81-85, 102</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;character objectives, 81</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;combat, 81-85</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;budget, 83-84</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;difficulty, 82-84, 84-85</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;multi-part, 83</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;party size, 83</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XP thresholds, 82-83</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dungeon, 102</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fun, 85</td>
+  </tr>
+  <tr>
+    <td>creating an NPC, 89-97, 244, 279-283</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;abilities, 89</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;appearance, 89</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;attitude, 244</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bond, 91</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;challenge rating, 92</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;class, 96-97, 283</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;detailed, 89-91</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;equipment, 92</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;flaw, 91</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ideal, 90</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;interaction trait, 90</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;loyalty, 93</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mannerism, 90</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;monster, 91-92</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;occupation and history, 89</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;quickly, 89</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;statistics, 92, 279-283</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;talent, 90</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;useful knowledge, 90</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;villain, 94-97</td>
+  </tr>
+  <tr>
+    <td>creating an organization, 21-22</td>
+  </tr>
+  <tr>
+    <td>creating a plane, 43</td>
+  </tr>
+  <tr>
+    <td>creating a race, 285-287</td>
+  </tr>
+  <tr>
+    <td>creating a religion, 10-13</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;animism, 12</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dualism, 12</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;forces and philosophies, 12-13</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;loose pantheon, 10-11</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;monotheism, 12</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mystery cults, 11-12</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;racial, 13</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tight pantheon, 11</td>
+  </tr>
+  <tr>
+    <td>creating a settlement, 15-20, 112-116</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;as an adventure site, 16</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;atmosphere, 17</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;commerce, 19-20</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;encounters, 114-116</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;government, 17-19</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map, 114, 313</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;purpose, 15-16</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;random, 112-114</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;size, 16-17</td>
+  </tr>
+  <tr>
+    <td>creating a spell, 283-284</td>
+  </tr>
+  <tr>
+    <td>creating a trap, 120-122</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;complex, 121-122</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;detection, 120-121</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;disabling, 120-121</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;effects, 121</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;trigger, 120</td>
+  </tr>
+  <tr>
+    <td>creating a wilderness, 14, 25-26, 73, 106-112, 116-120</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;creating an encounter, 81-85, 102</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;encounters, 106</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;features, 108-109</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;goals, 73</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hazards, 109-112</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map, 14, 25-26, 108-109</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;random encounters, 85-87, 106, 114-116, 118</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unusual environments, 116-120</td>
+  </tr>
+  <tr>
+    <td>creating a world, 4, 9-41</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;currency, 19-20</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;magic, 9-10, 23-24</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map, 14</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;religion, 10-13</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;settlements, 15-20</td>
+  </tr>
+  <tr>
+    <td>critical hits, 248</td>
+  </tr>
+  <tr>
+    <td>currency, 19-20, 133</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;creating a, 20</td>
+  </tr>
+  <tr>
+    <td>cursed items, 138-139</td>
+  </tr>
+  <tr>
+    <th><h4>D</h4></th>
+  </tr>
+  <tr>
+    <td>damage, 249, 273</td>
+  </tr>
+  <tr>
+    <td>damaging objects, 246-247</td>
+  </tr>
+  <tr>
+    <td>dark fantasy, 40</td>
+  </tr>
+  <tr>
+    <td>darkness, 104-105</td>
+  </tr>
+  <tr>
+    <td>dart trap, 123</td>
+  </tr>
+  <tr>
+    <td>Dawn War deities, 10</td>
+  </tr>
+  <tr>
+    <td>DC (Difficulty Class), 238-239</td>
+  </tr>
+  <tr>
+    <td>Death Dells (Abyssal plane), 63</td>
+  </tr>
+  <tr>
+    <td>Death domain, 96-97</td>
+  </tr>
+  <tr>
+    <td>Deep Ethereal, 48-49</td>
+  </tr>
+  <tr>
+    <td>degrees of failure, 242</td>
+  </tr>
+  <tr>
+    <td>deity, 10-13</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;divine rank, 11</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pantheon, 10-11</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;racial, 13</td>
+  </tr>
+  <tr>
+    <td>demigod, 11</td>
+  </tr>
+  <tr>
+    <td>demiplane, 68</td>
+  </tr>
+  <tr>
+    <td>Demonweb, The (Abyssal plane), 62-63</td>
+  </tr>
+  <tr>
+    <td>desecrated ground, 110</td>
+  </tr>
+  <tr>
+    <td>desert monsters, 302</td>
+  </tr>
+  <tr>
+    <td>destroying artifacts, 221</td>
+  </tr>
+  <tr>
+    <td>detecting a hazard, 105</td>
+  </tr>
+  <tr>
+    <td>detecting a trap, 120-121</td>
+  </tr>
+  <tr>
+    <td>diagonal movement, 252</td>
+  </tr>
+  <tr>
+    <td>dice, 235, 236-237</td>
+  </tr>
+  <tr>
+    <td>Difficulty Class (DC), 238-239</td>
+  </tr>
+  <tr>
+    <td>disabling a trap, 120-121</td>
+  </tr>
+  <tr>
+    <td>disadvantage, 239-240</td>
+  </tr>
+  <tr>
+    <td>disarm, 271</td>
+  </tr>
+  <tr>
+    <td>disease, 256-257</td>
+  </tr>
+  <tr>
+    <td>Dis (Nine Hells), 64</td>
+  </tr>
+  <tr>
+    <td>divine rank, 11</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;deity, 10-13</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lesser deities, 11</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Greater deities, 11</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quasi-deities, 11</td>
+  </tr>
+  <tr>
+    <td>Domains of Dread (Shadowfell), 51-52</td>
+  </tr>
+  <tr>
+    <td>doors, 103-104</td>
+  </tr>
+  <tr>
+    <td>downtime activities, 127-131</td>
+  </tr>
+  <tr>
+    <td>dualism, 12</td>
+  </tr>
+  <tr>
+    <td>dungeon, 72-75, 99-105, 290-301</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;creating, 72-73, 74, 99-105, 290-301</td>
+  </tr>
+  <tr>
+    <td>Dungeon Master, 4</td>
+  </tr>
+  <tr>
+    <th><h4>E</h4></th>
+  </tr>
+  <tr>
+    <td>echo plane, 43</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Feywild, 43, 49-50</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Shadowfell, 43, 51-52</td>
+  </tr>
+  <tr>
+    <td>ecology (dungeon), 102</td>
+  </tr>
+  <tr>
+    <td>eladrin, 286</td>
+  </tr>
+  <tr>
+    <td>Elemental Chaos, 52-53</td>
+  </tr>
+  <tr>
+    <td>Elemental Planes (Inner Planes), 43, 52-57</td>
+  </tr>
+  <tr>
+    <td>Elysium (Outer Plane), 58, 60</td>
+  </tr>
+  <tr>
+    <td>encounter, 75, 77, 81-87, 102, 106</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;creating an encounter, 81-85, 102</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;random encounters, 85-87, 106, 114-116, 118</td>
+  </tr>
+  <tr>
+    <td>ending a campaign, 33</td>
+  </tr>
+  <tr>
+    <td>ending an adventure, 72, 75, 77</td>
+  </tr>
+  <tr>
+    <td>Endless Maze, The (Abyssal plane), 63</td>
+  </tr>
+  <tr>
+    <td>environment, 109-112, 116-120</td>
+  </tr>
+  <tr>
+    <td>epic boons, 230, 231-232</td>
+  </tr>
+  <tr>
+    <td>epic fantasy, 39</td>
+  </tr>
+  <tr>
+    <td>episodic campaign, 36</td>
+  </tr>
+  <tr>
+    <td>equipment (NPC), 92</td>
+  </tr>
+  <tr>
+    <td>ether cyclone, 49</td>
+  </tr>
+  <tr>
+    <td>Ethereal curtains, 48-49</td>
+  </tr>
+  <tr>
+    <td>Ethereal Plane, 43, 48-49</td>
+  </tr>
+  <tr>
+    <td>event-based adventure, 75-77</td>
+  </tr>
+  <tr>
+    <td>events (campaign), 26-33</td>
+  </tr>
+  <tr>
+    <td>Evernight (Shadowfell), 52</td>
+  </tr>
+  <tr>
+    <td>expenses (character), 126-127</td>
+  </tr>
+  <tr>
+    <td>experience points (XP), 82-84, 260-261</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;thresholds, 82-83</td>
+  </tr>
+  <tr>
+    <td>exploration, 242-244</td>
+  </tr>
+  <tr>
+    <td>explosives, 267-268</td>
+  </tr>
+  <tr>
+    <td>extra NPC, 94</td>
+  </tr>
+  <tr>
+    <th><h4>F</h4></th>
+  </tr>
+  <tr>
+    <td>facing, 252</td>
+  </tr>
+  <tr>
+    <td>factions</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;organizations, 21-23</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;creating a dungeon: factions, 101-102</td>
+  </tr>
+  <tr>
+    <td>falling net (trap), 122</td>
+  </tr>
+  <tr>
+    <td>Far Realm, 68</td>
+  </tr>
+  <tr>
+    <td>favors, 229-230</td>
+  </tr>
+  <tr>
+    <td>fear, 266</td>
+  </tr>
+  <tr>
+    <td>fey crossings, 50</td>
+  </tr>
+  <tr>
+    <td>Feywild magic, 50</td>
+  </tr>
+  <tr>
+    <td>Feywild (Plane of Faerie), 43, 49-50</td>
+  </tr>
+  <tr>
+    <td>firearms, 267, 268</td>
+  </tr>
+  <tr>
+    <td>fire-breathing statue (trap), 122</td>
+  </tr>
+  <tr>
+    <td>flanking, 251</td>
+  </tr>
+  <tr>
+    <td>flavor (campaign), 38-41</td>
+  </tr>
+  <tr>
+    <td>flaw (NPC), 91</td>
+  </tr>
+  <tr>
+    <td>flying, 119-120</td>
+  </tr>
+  <tr>
+    <td>followers, 92-93</td>
+  </tr>
+  <tr>
+    <td>food and water, 111</td>
+  </tr>
+  <tr>
+    <td>foraging, 111</td>
+  </tr>
+  <tr>
+    <td>foreshadowing, 126</td>
+  </tr>
+  <tr>
+    <td>forest monsters, 302-303</td>
+  </tr>
+  <tr>
+    <td>framing events, 79</td>
+  </tr>
+  <tr>
+    <td>frigid water, 110</td>
+  </tr>
+  <tr>
+    <td>fun, 85</td>
+  </tr>
+  <tr>
+    <th><h4>G</h4></th>
+  </tr>
+  <tr>
+    <td>gaining levels, 131, 261</td>
+  </tr>
+  <tr>
+    <td>gaining renown, 22, 129</td>
+  </tr>
+  <tr>
+    <td>Gaping Maw, The (Abyssal plane), 62</td>
+  </tr>
+  <tr>
+    <td>garrisons (character), 127</td>
+  </tr>
+  <tr>
+    <td>gate-towns (Outlands), 67</td>
+  </tr>
+  <tr>
+    <td>Ghenna (Outer Plane), 58, 63</td>
+  </tr>
+  <tr>
+    <td>gemstones, 133, 134</td>
+  </tr>
+  <tr>
+    <td>Gloaming Court (Feywild), 49</td>
+  </tr>
+  <tr>
+    <td>god (deity), 10-13</td>
+  </tr>
+  <tr>
+    <td>government, 17-19</td>
+  </tr>
+  <tr>
+    <td>grassland monsters, 303</td>
+  </tr>
+  <tr>
+    <td>greater deity, 11</td>
+  </tr>
+  <tr>
+    <td>Great Wheel, 44</td>
+  </tr>
+  <tr>
+    <td>green slime, 105</td>
+  </tr>
+  <tr>
+    <td>grenades, 268</td>
+  </tr>
+  <tr>
+    <td>grid, 250-252</td>
+  </tr>
+  <tr>
+    <th><h4>H</h4></th>
+  </tr>
+  <tr>
+    <td>hack and slash, 34</td>
+  </tr>
+  <tr>
+    <td>Hades (Outer Plane), 58, 63</td>
+  </tr>
+  <tr>
+    <td>Harpers, 21</td>
+  </tr>
+  <tr>
+    <td>hazards, 105, 109-112</td>
+  </tr>
+  <tr>
+    <td>healing variants, 266-267</td>
+  </tr>
+  <tr>
+    <td>heat, 110</td>
+  </tr>
+  <tr>
+    <td>heroic fantasy, 38</td>
+  </tr>
+  <tr>
+    <td>hero points, 264</td>
+  </tr>
+  <tr>
+    <td>high altitude, 110</td>
+  </tr>
+  <tr>
+    <td>hill monsters, 304</td>
+  </tr>
+  <tr>
+    <td>hirelings, 94</td>
+  </tr>
+  <tr>
+    <td>hit points, 247-248</td>
+  </tr>
+  <tr>
+    <td>hitting cover, 272</td>
+  </tr>
+  <tr>
+    <td>hoard treasure, 133, 137-139</td>
+  </tr>
+  <tr>
+    <td>home base (for characters), 15, 25</td>
+  </tr>
+  <tr>
+    <td>honor, 264-265</td>
+  </tr>
+  <tr>
+    <td>horror, 266</td>
+  </tr>
+  <tr>
+    <th><h4>I</h4></th>
+  </tr>
+  <tr>
+    <td>ice (hazard), 110-lll</td>
+  </tr>
+  <tr>
+    <td>ideal (NPC), 90</td>
+  </tr>
+  <tr>
+    <td>identifying a magic item, 136</td>
+  </tr>
+  <tr>
+    <td>immersive storytelling, 34</td>
+  </tr>
+  <tr>
+    <td>individual treasure, 133, 136</td>
+  </tr>
+  <tr>
+    <td>Infinite Staircase, 58-59</td>
+  </tr>
+  <tr>
+    <td>influence, 78</td>
+  </tr>
+  <tr>
+    <td>initiative, 247, 270-271</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;variants, 270-271</td>
+  </tr>
+  <tr>
+    <td>injuries, 272-273</td>
+  </tr>
+  <tr>
+    <td>Inner Planes, 43, 52-57</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;City of Brass, 55</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Elemental Chaos, 52</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Plane of Air, 53</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Plane of Earth, 54</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Plane of Fire, 55</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Plane of Water, 56</td>
+  </tr>
+  <tr>
+    <td>inspiration, 240-241</td>
+  </tr>
+  <tr>
+    <td>inspirational reading, 316</td>
+  </tr>
+  <tr>
+    <td>interaction trait (NPC), 90</td>
+  </tr>
+  <tr>
+    <td>intrigue, 40, 78</td>
+  </tr>
+  <tr>
+    <th><h4>K</h4></th>
+  </tr>
+  <tr>
+    <td>kingdom scale (map), 14</td>
+  </tr>
+  <tr>
+    <td>knowledge (NPC), 90</td>
+  </tr>
+  <tr>
+    <th><h4>L</h4></th>
+  </tr>
+  <tr>
+    <td>lairs, 108</td>
+  </tr>
+  <tr>
+    <td>land, 229</td>
+  </tr>
+  <tr>
+    <td>languages, 20-21</td>
+  </tr>
+  <tr>
+    <td>larva (Hades), 63</td>
+  </tr>
+  <tr>
+    <td>law,114</td>
+  </tr>
+  <tr>
+    <td>layers, planar, 58</td>
+  </tr>
+  <tr>
+    <td>lesser deity, 11</td>
+  </tr>
+  <tr>
+    <td>letters of recommendation, 228-229</td>
+  </tr>
+  <tr>
+    <td>light, 104-105</td>
+  </tr>
+  <tr>
+    <td>Limbo (Outer Plane), 58, 61-62</td>
+  </tr>
+  <tr>
+    <td>line of sight, 251</td>
+  </tr>
+  <tr>
+    <td>linking adventures, 125-126</td>
+  </tr>
+  <tr>
+    <td>location-based adventure, 72-75</td>
+  </tr>
+  <tr>
+    <td>locked doors, 103</td>
+  </tr>
+  <tr>
+    <td>long rest, 267</td>
+  </tr>
+  <tr>
+    <td>loose pantheon, 10-11</td>
+  </tr>
+  <tr>
+    <td>losing the path, 111-112, 117-118</td>
+  </tr>
+  <tr>
+    <td>Lower Planes, 58</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Outer Planes, 43, 57-67</td>
+  </tr>
+  <tr>
+    <td>loyalty, 93</td>
+  </tr>
+  <tr>
+    <th><h4>M</h4></th>
+  </tr>
+  <tr>
+    <td>madness, 258-260</td>
+  </tr>
+  <tr>
+    <td>magic, 9-10, 23-24</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;creating a magic item, 214-216, 284-285</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;creating a spell, 283-284</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;magic items, 128-129, 129-130, 133, 135-227</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;restrictions, 24</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;schools of, 24</td>
+  </tr>
+  <tr>
+    <td>magic items, 128-129, 129-130, 133, 135-227</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alphabetical descriptions, 150-214</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;artifacts, 219-227</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;attunement, 136-138</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;buying, 135-136</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;categories, 139-140</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;armor, 139</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;potions, 139</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rings, 139</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rods, 139</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scrolls, 139</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;staffs, 140</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wands, 140</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;weapons, 140</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wondrous items, 140</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;crafting, 128-129, 141</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cursed, 138-139</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;formulas, 141</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;identifying, 136</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rarity, 135</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resilience, 141</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;objects, 246-247</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;selling, 129-130, 135-136</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sentient, 214-218</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;special features, 141-143</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wearing and wielding, 140-141</td>
+  </tr>
+  <tr>
+    <td>Maladomini (Nine Hells), 65</td>
+  </tr>
+  <tr>
+    <td>Malbolge (Nine Hells), 65</td>
+  </tr>
+  <tr>
+    <td>mannerism (NPC), 90</td>
+  </tr>
+  <tr>
+    <td>mapping, 14, 25-26, 72, 75, 77, 102-105, 108-109, 114, 255</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;campaign, 14, 25</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scale, 14</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;chases, 255</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dungeon, 102-105</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;samples, 310-315</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;settlement, 114</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wilderness, 108-109</td>
+  </tr>
+  <tr>
+    <td>mark, 271</td>
+  </tr>
+  <tr>
+    <td>marks of prestige, 228-231</td>
+  </tr>
+  <tr>
+    <td>massive damage, 273</td>
+  </tr>
+  <tr>
+    <td>Material Plane, 43</td>
+  </tr>
+  <tr>
+    <td>Material Plane echoes, 43</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Feywild, 43, 49-50</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Shadowfell, 43, 51-52</td>
+  </tr>
+  <tr>
+    <td>Mechanus (Outer Plane), 58, 66</td>
+  </tr>
+  <tr>
+    <td>medals, 229</td>
+  </tr>
+  <tr>
+    <td>memory loss (Feywild), 50</td>
+  </tr>
+  <tr>
+    <td>metagame thinking, 235</td>
+  </tr>
+  <tr>
+    <td>milestones, 261</td>
+  </tr>
+  <tr>
+    <td>Minauros (Nine Hells), 64</td>
+  </tr>
+  <tr>
+    <td>miniatures, 250-252</td>
+  </tr>
+  <tr>
+    <td>missing players, 235-236, 260</td>
+  </tr>
+  <tr>
+    <td>mixing potions, 140</td>
+  </tr>
+  <tr>
+    <td>mobs, 250</td>
+  </tr>
+  <tr>
+    <td>modifying a class, 287-289</td>
+  </tr>
+  <tr>
+    <td>modifying a magic item, 284</td>
+  </tr>
+  <tr>
+    <td>modifying a monster, 273-274</td>
+  </tr>
+  <tr>
+    <td>monotheism, 12</td>
+  </tr>
+  <tr>
+    <td>monsters, 71, 74, 82, 91-92, 247-248, 273-283, 302-305, 306-309</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;creating a monster, 273-283</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;creating an encounter, 81-85, 102</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;creating an NPC, 89-97, 244, 279-283</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;random encounters, 85-87, 106, 114-116, 118</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;as NPCs, 91-92</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;by challenge rating, 306-309</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;by terrain, 302-305</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arctic, 302</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;coastal, 302</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;desert, 302</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;forest, 302</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;grassland, 303</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hill, 304</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mountain, 304</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;swamp, 304</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;underdark, 305</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;underwater, 305</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;urban, 305</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;challenge rating, 82</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hit points, 247-248</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mobs, 250</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;statistics by challenge rating, 274</td>
+  </tr>
+  <tr>
+    <td>monuments, 108</td>
+  </tr>
+  <tr>
+    <td>morale, 273</td>
+  </tr>
+  <tr>
+    <td>moral quandaries, 79-80</td>
+  </tr>
+  <tr>
+    <td>mountain monsters, 304</td>
+  </tr>
+  <tr>
+    <td>Mount Celestia (Outer Plane), 58, 59</td>
+  </tr>
+  <tr>
+    <td>movement, 252</td>
+  </tr>
+  <tr>
+    <td>multiverse, 43-69</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;creating, 43-69</td>
+  </tr>
+  <tr>
+    <td>mystery, 40, 77-78</td>
+  </tr>
+  <tr>
+    <td>mystery cults, 11-12</td>
+  </tr>
+  <tr>
+    <td>mythic fantasy, 39</td>
+  </tr>
+  <tr>
+    <th><h4>N</h4></th>
+  </tr>
+  <tr>
+    <td>navigation, lll-112, 117-118</td>
+  </tr>
+  <tr>
+    <td>Negative Plane, 43</td>
+  </tr>
+  <tr>
+    <td>Nessus (Nine Hells), 66</td>
+  </tr>
+  <tr>
+    <td>net (trap), 122</td>
+  </tr>
+  <tr>
+    <td>new players, 236</td>
+  </tr>
+  <tr>
+    <td>Nine Hells, The (Outer Plane), 58, 64-66</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Avernus, 64</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cania, 65</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dis, 64</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Maladomini, 65</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Malbolge, 65</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Minauros, 64</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nessus, 65</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Phlegethos, 64</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stygia, 64</td>
+  </tr>
+  <tr>
+    <td>noble titles, 19, 230</td>
+  </tr>
+  <tr>
+    <td>noncombat challenges, 261</td>
+  </tr>
+  <tr>
+    <td>nonplayer character (NPC), see NPC</td>
+  </tr>
+  <tr>
+    <td>noticing other creatures, 243</td>
+  </tr>
+  <tr>
+    <td>NPC (nonplayer character), 74, 75-76, 77, 78, 89-97, 244-246, 247-248</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;adventurer, 93</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;creating, 89-97, 244, 279-283</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hit points, 247-248</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;party members, 92-93</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;roleplaying, 244-246</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;villain, 74, 75-76, 77, 78, 94-97</td>
+  </tr>
+  <tr>
+    <th><h4>O</h4></th>
+  </tr>
+  <tr>
+    <td>oathbreaker (paladin), 97</td>
+  </tr>
+  <tr>
+    <td>objects, 246-247</td>
+  </tr>
+  <tr>
+    <td>occupation (NPC), 89</td>
+  </tr>
+  <tr>
+    <td>ocean, 117-119</td>
+  </tr>
+  <tr>
+    <td>organizations, 21-23</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;adventurer, 21-22</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;creating, 21-22</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rank, 22</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;renown, 22-23</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sample, 21, 23</td>
+  </tr>
+  <tr>
+    <td>other rewards, 227-232</td>
+  </tr>
+  <tr>
+    <td>Outer Planes, 43, 57-67</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Abyss, The, 62</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Arborea, 60</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Arcadia, 66</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Archeron, 66</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Beastlands, The, 60</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bytopia, 59</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Carceri, 63</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Elysium, 60</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gehenna, 63</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hades, 63</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Limbo, 61</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mechanus, 66</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mount Celestia, 59</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nine Hells, The, 64</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;optional rules, 59</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pandemonium, 62</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ysgard, 61</td>
+  </tr>
+  <tr>
+    <td>Outlands, 67-68</td>
+  </tr>
+  <tr>
+    <td>overrun, 272</td>
+  </tr>
+  <tr>
+    <td>owning property, 126-127</td>
+  </tr>
+  <tr>
+    <th><h4>P</h4></th>
+  </tr>
+  <tr>
+    <td>Pandemonium (Outer Plane), 58, 62</td>
+  </tr>
+  <tr>
+    <td>pantheon, 10-11, 13</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;loose, 10-11</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;of the Dawn War, 11</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;racial, 13</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sample, 11</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tight, 11</td>
+  </tr>
+  <tr>
+    <td>patron, 94</td>
+  </tr>
+  <tr>
+    <td>performing sacred rites, 129</td>
+  </tr>
+  <tr>
+    <td>philosophies, 12-13</td>
+  </tr>
+  <tr>
+    <td>Phlegethos (Nine Hells), 64</td>
+  </tr>
+  <tr>
+    <td>piety, 23</td>
+  </tr>
+  <tr>
+    <td>pit (trap), 122-123</td>
+  </tr>
+  <tr>
+    <td>planar categories, 43</td>
+  </tr>
+  <tr>
+    <td>planar layers, 58</td>
+  </tr>
+  <tr>
+    <td>planar portals, 45, 47, 48-49, 50, 51, 58-59, 67-68</td>
+  </tr>
+  <tr>
+    <td>planar travel, 44-46, 58-59</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;planar portals, 45, 47, 48-49, 50, 51, 58-59, 67-68</td>
+  </tr>
+  <tr>
+    <td>Plane of Air, 53-54</td>
+  </tr>
+  <tr>
+    <td>Plane of Earth, 54</td>
+  </tr>
+  <tr>
+    <td>Plane of Faerie (Feywild), 43, 49-50</td>
+  </tr>
+  <tr>
+    <td>Plane of Fire, 55-56</td>
+  </tr>
+  <tr>
+    <td>Plane of Shadow (Shadowfell), 43, 51-52</td>
+  </tr>
+  <tr>
+    <td>Plane of Water, 56-57</td>
+  </tr>
+  <tr>
+    <td>planes of existence, 43-69</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cosmology, 43-44</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Astral Plane, 46</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ethereal Plane, 48</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Feywild, 49</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Shadowfell, 51</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inner Planes, 52</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Outer Planes, 57</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Other Planes, 67</td>
+  </tr>
+  <tr>
+    <td>players, 6</td>
+  </tr>
+  <tr>
+    <td>play style, 34-36</td>
+  </tr>
+  <tr>
+    <td>plot points, 269-270</td>
+  </tr>
+  <tr>
+    <td>poison, 257-258</td>
+  </tr>
+  <tr>
+    <td>poison darts (trap), 123</td>
+  </tr>
+  <tr>
+    <td>poison needle (trap), 123</td>
+  </tr>
+  <tr>
+    <td>portcullises, 104</td>
+  </tr>
+  <tr>
+    <td>Positive Plane, 43</td>
+  </tr>
+  <tr>
+    <td>potions, 139, 140</td>
+  </tr>
+  <tr>
+    <td>precipitation, 110</td>
+  </tr>
+  <tr>
+    <td>proficiency, 239, 263-264</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;background, 264</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dice, 263</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;personality trait, 264</td>
+  </tr>
+  <tr>
+    <td>property (character), 126-127</td>
+  </tr>
+  <tr>
+    <td>province scale (map), 14</td>
+  </tr>
+  <tr>
+    <td>psychic dissonance (Outer Planes), 59</td>
+  </tr>
+  <tr>
+    <td>psychic wind (Astral), 47-48</td>
+  </tr>
+  <tr>
+    <td>published adventures, 72</td>
+  </tr>
+  <tr>
+    <td>published worlds, 9, 68</td>
+  </tr>
+  <tr>
+    <th><h4>Q</h4></th>
+  </tr>
+  <tr>
+    <td>quicksand, 110</td>
+  </tr>
+  <tr>
+    <td>quirk, 90, 143</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;magic item, 143</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NPC, 90</td>
+  </tr>
+  <tr>
+    <th><h4>R</h4></th>
+  </tr>
+  <tr>
+    <td>race, 285-287</td>
+  </tr>
+  <tr>
+    <td>racial deity, 13</td>
+  </tr>
+  <tr>
+    <td>rain, 110</td>
+  </tr>
+  <tr>
+    <td>raising a stronghold, 128</td>
+  </tr>
+  <tr>
+    <td>random dungeons, 290-301</td>
+  </tr>
+  <tr>
+    <td>random encounters, 85-87, 106, 114-116, 118</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;challenge, 87</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;checking for, 86</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;creating tables, 86-87</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sample table, 87</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sea, 118</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;settlement, 114-116</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;triggering, 85</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;underwater, 116</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wilderness, 106</td>
+  </tr>
+  <tr>
+    <td>random magic items, 144-149</td>
+  </tr>
+  <tr>
+    <td>random settlements, 112-114</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;creating a settlement, 15-20, 112-116</td>
+  </tr>
+  <tr>
+    <td>random treasure, 133-135, 136-139, 144-149</td>
+  </tr>
+  <tr>
+    <td>rank (in an organization), 22</td>
+  </tr>
+  <tr>
+    <td>rarity, 135</td>
+  </tr>
+  <tr>
+    <td>razorvine, 110</td>
+  </tr>
+  <tr>
+    <td>reactions, 252</td>
+  </tr>
+  <tr>
+    <td>religion, 10-13</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;creating, 10-13</td>
+  </tr>
+  <tr>
+    <td>renown, 22-23, 78, 129</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;as piety, 23</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;benefits, 22-23</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gaining, 22, 129</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;losing, 23</td>
+  </tr>
+  <tr>
+    <td>resolving social interaction, 244-245</td>
+  </tr>
+  <tr>
+    <td>restrictions on magic, 24</td>
+  </tr>
+  <tr>
+    <td>rest variants, 267</td>
+  </tr>
+  <tr>
+    <td>resurrection, 24</td>
+  </tr>
+  <tr>
+    <td>rings, 139</td>
+  </tr>
+  <tr>
+    <td>River Styx, 58</td>
+  </tr>
+  <tr>
+    <td>rods, 139</td>
+  </tr>
+  <tr>
+    <td>roleplaying, 245-246</td>
+  </tr>
+  <tr>
+    <td>rolling sphere (trap), 123</td>
+  </tr>
+  <tr>
+    <td>rolling the dice, 235, 236-237, 242</td>
+  </tr>
+  <tr>
+    <td>ruins, 108</td>
+  </tr>
+  <tr>
+    <td>rules, 5</td>
+  </tr>
+  <tr>
+    <td>rules discussions, 235</td>
+  </tr>
+  <tr>
+    <td>running a business, 127, 129</td>
+  </tr>
+  <tr>
+    <td>running the game, 235-261</td>
+  </tr
+  <tr>
+    <th><h4>S</h4></th>
+  </tr>
+  <tr>
+    <td>sailing vessels, 119</td>
+  </tr>
+  <tr>
+    <td>sanity, 265-266</td>
+  </tr>
+  <tr>
+    <td>saving throws, 238, 239</td>
+  </tr>
+  <tr>
+    <td>schools of magic, 24</td>
+  </tr>
+  <tr>
+    <td>scrolls, 139, 140</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mishaps, 140</td>
+  </tr>
+  <tr>
+    <td>sea, 117-119</td>
+  </tr>
+  <tr>
+    <td>secret doors, 103-104</td>
+  </tr>
+  <tr>
+    <td>seelie fey, 49</td>
+  </tr>
+  <tr>
+    <td>selling magic items, 129-130, 135-136</td>
+  </tr>
+  <tr>
+    <td>sentient magic items, 214-218</td>
+  </tr>
+  <tr>
+    <td>settlements, 15-20, 108, 112-116, 254</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;creating, 15-20, 112-116</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;chases, 254</td>
+  </tr>
+  <tr>
+    <td>shadow crossings, 51</td>
+  </tr>
+  <tr>
+    <td>Shadowfell despair, 52</td>
+  </tr>
+  <tr>
+    <td>Shadowfell (Plane of Shadow), 43, 51-52</td>
+  </tr>
+  <tr>
+    <td>ships, 119</td>
+  </tr>
+  <tr>
+    <td>shipwrecks, 118</td>
+  </tr>
+  <tr>
+    <td>short rest, 84, 267</td>
+  </tr>
+  <tr>
+    <td>shove aside, 272</td>
+  </tr>
+  <tr>
+    <td>side quests, 81</td>
+  </tr>
+  <tr>
+    <td>siege equipment, 255-256</td>
+  </tr>
+  <tr>
+    <td>Sigil, City of Doors, 58, 68</td>
+  </tr>
+  <tr>
+    <td>silver cord, 47</td>
+  </tr>
+  <tr>
+    <td>size, 251</td>
+  </tr>
+  <tr>
+    <td>skills, 239, 263-264</td>
+  </tr>
+  <tr>
+    <td>sky, 119-120</td>
+  </tr>
+  <tr>
+    <td>slippery ice, 110</td>
+  </tr>
+  <tr>
+    <td>small player groups, 236</td>
+  </tr>
+  <tr>
+    <td>snow, 110</td>
+  </tr>
+  <tr>
+    <td>social interaction, 244-246</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resolving, 244-245</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;roleplaying, 245-246</td>
+  </tr>
+  <tr>
+    <td>sounds, 105</td>
+  </tr>
+  <tr>
+    <td>sowing rumors, 131</td>
+  </tr>
+  <tr>
+    <td>special features for magic items, 141-143</td>
+  </tr>
+  <tr>
+    <td>special rights, 230</td>
+  </tr>
+  <tr>
+    <td>speed factor, 270-271</td>
+  </tr>
+  <tr>
+    <td>spell points, 288-289</td>
+  </tr>
+  <tr>
+    <td>spells in magic items, 141</td>
+  </tr>
+  <tr>
+    <td>sphere of annihilation (trap), 123</td>
+  </tr>
+  <tr>
+    <td>spiderwebs, 105</td>
+  </tr>
+  <tr>
+    <td>spiked pit (trap), 123</td>
+  </tr>
+  <tr>
+    <td>staffs, 140</td>
+  </tr>
+  <tr>
+    <td>starting at higher level, 38</td>
+  </tr>
+  <tr>
+    <td>starting attitude (NPC), 244</td>
+  </tr>
+  <tr>
+    <td>story, 71, 72, 125</td>
+  </tr>
+  <tr>
+    <td>strongholds, 109, 128, 230</td>
+  </tr>
+  <tr>
+    <td>structure (adventure), 72</td>
+  </tr>
+  <tr>
+    <td>stuck doors, 103</td>
+  </tr>
+  <tr>
+    <td>Stygia (Nine Hells), 64-65</td>
+  </tr>
+  <tr>
+    <td>Styx, River, 58</td>
+  </tr>
+  <tr>
+    <td>subrace, 285-287</td>
+  </tr>
+  <tr>
+    <td>success at a cost, 242</td>
+  </tr>
+  <tr>
+    <td>Summer Court (Feywild), 49</td>
+  </tr>
+  <tr>
+    <td>supernatural gifts, 227-228</td>
+  </tr>
+  <tr>
+    <td>survival, 109-112</td>
+  </tr>
+  <tr>
+    <td>suspects (mystery), 77-78</td>
+  </tr>
+  <tr>
+    <td>swamp monsters, 304</td>
+  </tr>
+  <tr>
+    <td>swashbuckling, 40</td>
+  </tr>
+  <tr>
+    <td>swimming, 116-117</td>
+  </tr>
+  <tr>
+    <td>swords and sorcery, 38-39</td>
+  </tr>
+  <tr>
+    <td>system shock, 273</td>
+  </tr>
+  <tr>
+    <th><h4>T</h4></th>
+  </tr>
+  <tr>
+    <td>table rules, 235-236</td>
+  </tr>
+  <tr>
+    <td>table talk, 235</td>
+  </tr>
+  <tr>
+    <td>tactical map, 250-252</td>
+  </tr>
+  <tr>
+    <td>talent (NPC), 90</td>
+  </tr>
+  <tr>
+    <td>teleportation circles, 24</td>
+  </tr>
+  <tr>
+    <td>temperature, 109-110</td>
+  </tr>
+  <tr>
+    <td>Thanatos (Abyssal plane), 62</td>
+  </tr>
+  <tr>
+    <td>theme (campaign), 36</td>
+  </tr>
+  <tr>
+    <td>thin ice, 111</td>
+  </tr>
+  <tr>
+    <td>tiers of play, 36-38</td>
+  </tr>
+  <tr>
+    <td>tight pantheon, 11</td>
+  </tr>
+  <tr>
+    <td>time, 32-33</td>
+  </tr>
+  <tr>
+    <td>time warp (Feywild), 50</td>
+  </tr>
+  <tr>
+    <td>titan, 11</td>
+  </tr>
+  <tr>
+    <td>titles, 19, 230</td>
+  </tr>
+  <tr>
+    <td>tools, 239</td>
+  </tr>
+  <tr>
+    <td>town, 17</td>
+  </tr>
+  <tr>
+    <td>tracking, 244</td>
+  </tr>
+  <tr>
+    <td>training, 131, 231</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to gain levels, 131</td>
+  </tr>
+  <tr>
+    <td>Transitive Planes, 43</td>
+  </tr>
+  <tr>
+    <td>traps, 120-123</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;creating, 120-122</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sample, 122-123</td>
+  </tr>
+  <tr>
+    <td>travel, 106-108, 109-112, 116-120, 242-244</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pace, 242-243</td>
+  </tr>
+  <tr>
+    <td>treasure, 133-232</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tables, 133, 136-139, 144-149</td>
+  </tr>
+  <tr>
+    <td>triggering a trap, 120</td>
+  </tr>
+  <tr>
+    <td>Triple Realm, The (Abyssal plane), 63</td>
+  </tr>
+  <tr>
+    <td>tumble, 272</td>
+  </tr>
+  <tr>
+    <td>twists (adventure), 80</td>
+  </tr>
+  <tr>
+    <th><h4>U</h4></th>
+  </tr>
+  <tr>
+    <td>Underdark monsters, 305</td>
+  </tr>
+  <tr>
+    <td>underwater, 116-117, 305</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;monsters, 305</td>
+  </tr>
+  <tr>
+    <td>unseelie fey, 49</td>
+  </tr>
+  <tr>
+    <td>Upper Planes, 58</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Outer Planes, 43, 57-67</td>
+  </tr>
+  <tr>
+    <td>urban monsters, 305</td>
+  </tr>
+  <tr>
+    <td>using ability scores, 237-240, 242</td>
+  </tr>
+  <tr>
+    <td>using a map, 242</td>
+  </tr>
+  <tr>
+    <td>using magic items, 140-141</td>
+  </tr>
+  <tr>
+    <td>using the dice, 235, 236-237, 242</td>
+  </tr>
+  <tr>
+    <th><h4>V</h4></th>
+  </tr>
+  <tr>
+    <td>vehicles, 119</td>
+  </tr>
+  <tr>
+    <td>vestige, 11</td>
+  </tr>
+  <tr>
+    <td>victim (mystery), 77</td>
+  </tr>
+  <tr>
+    <td>village, 16-17</td>
+  </tr>
+  <tr>
+    <td>villain, 74, 75-76, 77, 78, 94-97</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;class options, 96-97</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;methods, 95</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scheme, 94</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;weakness, 96</td>
+  </tr>
+  <tr>
+    <td>visibility, 117, 119, 243</td>
+  </tr>
+  <tr>
+    <th><h4>W</h4></th>
+  </tr>
+  <tr>
+    <td>walls, 102</td>
+  </tr>
+  <tr>
+    <td>wandering monsters, 302-305</td>
+  </tr>
+  <tr>
+    <td>wands, 140</td>
+  </tr>
+  <tr>
+    <td>war, 40-41</td>
+  </tr>
+  <tr>
+    <td>water vehicles, 119</td>
+  </tr>
+  <tr>
+    <td>weapons, magic, 140</td>
+  </tr>
+  <tr>
+    <td>wearing and wielding magic items, 140-141</td>
+  </tr>
+  <tr>
+    <td>weather, 109-110, 118-119</td>
+  </tr>
+  <tr>
+    <td>webs, 105</td>
+  </tr>
+  <tr>
+    <td>weirdness, 109</td>
+  </tr>
+  <tr>
+    <td>wilderness, 73, 106-112, 116-120, 254</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;creating a wilderness, 14, 25-26, 73, 106-112, 116-120</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;chases, 254</td>
+  </tr>
+  <tr>
+    <td>wind, 110</td>
+  </tr>
+  <tr>
+    <td>wondrous items, 140</td>
+  </tr>
+  <tr>
+    <td>World Axis, 44</td>
+  </tr>
+  <tr>
+    <td>world building, 9-41, 43-69</td>
+  </tr>
+  <tr>
+    <td>World Tree, the, 44</td>
+  </tr>
+  <tr>
+    <td>wuxia, 41</td>
+  </tr>
+  <tr>
+    <th><h4>X</h4></th>
+  </tr>
+  <tr>
+    <td>XP (experience points), 82-84, 260-261</td>
+  </tr>
+  <tr>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;thresholds, 82-83</td>
+  </tr>
+  <tr>
+    <th><h4>Y</h4></th>
+  </tr>
+  <tr>
+    <td>yellow mold, 105</td>
+  </tr>
+  <tr>
+    <td>Ysgard (Outer Plane), 58, 61</td>
+  </tr>
+  <tr>
+    <th><h4>Z</h4></th>
+  </tr>
+  <tr>
+    <td>Zhentarim, 23</td>
+  </tr>
+</table>
+
 		</div>
 	</div>
 		<script src="jquery-1.12.0.min.js"></script>
 		<script src="jquery-ui.min.js"></script>
-		<script src="jquery.tocify.min.js""></script>
+		<script src="jquery.tocify.min.js"></script>
+        <script src="dice.js""></script>                       
 		<script>
-			       //Executes your code when the DOM is ready.  Acts the same as $(document).ready().
+              //Executes your code when the DOM is ready.  Acts the same as $(document).ready().
               $(function() {
-				 var toc = $("#toc").tocify({ 
-					 selectors: "h1, h2, h3, h4, h5" 
-					 }).data("toc-tocify");
-                  //Calls the tocify method on your HTML div.
-                  $("#toc").tocify();				 
+                  // Calls the selectBoxIt method on your HTML select box and updates the showEffect option
+                  var toc = $("#toc").tocify({selectors: "h1, h2, h3, h4, h5" }).data("toc-tocify");
+                                    
+
+                  // Sets the showEffect, scrollTo, and smoothScroll options
+                  toc.setOptions({ showEffect: "fadeIn", scrollTo: 40, smoothScroll: false});              
+
+                    //Adds "roll" link to each table containing dice values
+                    setupDiceTables();		
               });
 		</script>
 	<script>
