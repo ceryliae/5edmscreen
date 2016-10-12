@@ -6965,3 +6965,51 @@ a.badge:focus {
 .glyphicon-menu-up:before {
   content: "\e260";
 }
+.jumbotron {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+  background-color: #cfb579;
+  color: #581A0F;
+}
+.jumbotron h1,
+.jumbotron .h1 {
+  color: inherit;
+}
+.jumbotron p {
+}
+.jumbotron > hr {
+  border-top-color: #39444e;
+}
+.container .jumbotron,
+.container-fluid .jumbotron {
+  border-radius: 0;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.jumbotron .container {
+  max-width: 100%;
+}
+@media screen and (min-width: 768px) {
+  .jumbotron {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+  .container .jumbotron,
+  .container-fluid .jumbotron {
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+  .jumbotron h1,
+  .jumbotron .h1 {
+    }
+.fix-center{
+    display: block;
+    margin: 0 auto;
+    float: inherit;
+}
+    .patron-header{
+        font-size: 50;
+        padding-top: 25px;
+        padding-bottom: 30px;
+    }
